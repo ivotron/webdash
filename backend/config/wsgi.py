@@ -7,6 +7,7 @@ named ``application``. Django's ``runserver`` and ``runfcgi`` commands discover
 this application via the ``WSGI_APPLICATION`` setting.
 """
 
+from raven.contrib.django.raven_compat.middleware.wsgi import Sentry
 import os
 import sys
 
@@ -14,7 +15,9 @@ from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 # This allows easy placement of apps within the interior serenity directory.
-current_path = os.path.dirname(os.path.abspath(__file__)).replace('/config', '')
+current_path = os.path.dirname(
+    os.path.abspath(__file__)).replace(
+        '/config', '')
 sys.path.append(current_path)
 sys.path.append(os.path.join(current_path, 'apps'))
 
@@ -23,6 +26,4 @@ sys.path.append(os.path.join(current_path, 'apps'))
 # setting points here.
 application = get_wsgi_application()
 
-from raven.contrib.django.raven_compat.middleware.wsgi import Sentry
 application = Sentry(application)
-
