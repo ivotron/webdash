@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from rest_framework.viewsets import ModelViewSet
+from apps.blackswan.serializers import WorkflowExecutionSerializer
+from apps.blackswan.models import WorkflowExecution
 
-# Create your views here.
+
+class WorkflowExecutionViewSet(ModelViewSet):
+    queryset = WorkflowExecution.objects.all()
+    serializer_class = WorkflowExecutionSerializer
