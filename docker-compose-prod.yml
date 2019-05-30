@@ -12,7 +12,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./backend:/app
+      - ./backend:/app:z
     command: /gunicorn.sh
     entrypoint: /entrypoint.sh
     restart: on-failure
@@ -21,7 +21,7 @@ services:
   postgres:
     image: postgres:10-alpine
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data:z
     env_file: .env
 
   nginx:
@@ -35,7 +35,7 @@ services:
     volumes:
       - ./backend/media/:/media/
       - ./backend/staticfiles/:/staticfiles/
-      - ./nginx/prod.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/prod.conf:/etc/nginx/nginx.conf:ro:z
 
 
 
@@ -46,6 +46,3 @@ services:
       - postgres
     volumes:
       - /tmp/backups/:/backups/
-
-
-
