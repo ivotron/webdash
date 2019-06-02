@@ -10,6 +10,7 @@ import VueRaven from 'vue-raven'
 
 import App from '@/App.vue'
 import './registerServiceWorker'
+
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
@@ -21,10 +22,10 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // more info: https://github.com/MatteoGabriele/vue-analytics
-Vue.use(VueAnalytics, {
+/*Vue.use(VueAnalytics, {
   id: process.env.VUE_APP_GOOGLE_ANALYTICS,
   router
-})
+})*/
 
 new Vue({
   router,
