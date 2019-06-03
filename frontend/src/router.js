@@ -33,7 +33,7 @@ const routes = [
       },
       {
         path: 'projects/executions',
-        meta: { title: 'executions' },
+        meta: { title: 'Executions' },
         component: ExecutionListComponent
       }
     ]

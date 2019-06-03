@@ -15,7 +15,7 @@
 
         <md-list>
           <md-list-item to="/projects">
-            <md-icon>move_to_inbox</md-icon>
+            <md-icon>view_list</md-icon>
             <span class="md-list-item-text">Projects</span>
           </md-list-item>
         </md-list>

@@ -20,7 +20,15 @@
       <md-table-row slot="md-table-row" slot-scope="{ item }">
         <md-table-cell md-label="ID" md-sort-by="id" md-numeric>{{ item.id }}</md-table-cell>
         <md-table-cell md-label="Name" md-sort-by="name">{{ item.name }}</md-table-cell>
-        <md-table-cell md-label="Project Title" md-sort-by="title">{{ item.title }}</md-table-cell>
+        <md-table-cell md-label="Title" md-sort-by="title">{{ item.title }}</md-table-cell>
+        <md-table-cell md-label="State" md-sort-by="state">
+          <div v-if="item.state === 'ok'">
+            <md-icon>check</md-icon>
+          </div>
+          <div v-else>
+            <md-icon>cancel</md-icon>
+          </div>
+        </md-table-cell>
       </md-table-row>
     </md-table>
   </div>
@@ -48,12 +56,14 @@
         {
           id: 1,
           name: "Popper",
-          title: "BlackSwan Project"
+          title: "BlackSwan Project",
+          state: "ok"
         },
         {
           id: 2,
           name: "Popper2.0",
-          title: "GHA workflow"
+          title: "GHA workflow",
+          state: "fail"
         }
       ]
     }),
@@ -74,5 +84,8 @@
 <style lang="scss" scoped>
   .md-field {
     max-width: 300px;
+  }
+  .md-icon {
+    height: 30px;
   }
 </style>
