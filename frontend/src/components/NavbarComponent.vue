@@ -2,6 +2,9 @@
     <div class="page-container md-layout-row">
     <md-app>
       <md-app-toolbar class="md-primary">
+        <md-button class="md-icon-button">
+          <md-icon>keyboard_arrow_left</md-icon>
+        </md-button>
         <span class="md-title">{{ $route.meta.title }}</span>
       </md-app-toolbar>
 
@@ -11,9 +14,9 @@
         </md-toolbar>
 
         <md-list>
-          <md-list-item to="/dashboard">
+          <md-list-item to="/projects">
             <md-icon>move_to_inbox</md-icon>
-            <span class="md-list-item-text">Dashboard</span>
+            <span class="md-list-item-text">Projects</span>
           </md-list-item>
         </md-list>
       </md-app-drawer>

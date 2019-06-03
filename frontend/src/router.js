@@ -2,7 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import NavbarComponent from '@/components/NavbarComponent.vue'
-import DashboardComponent from '@/components/DashboardComponent.vue'
+import ProjectListComponent from '@/components/project/ProjectListComponent.vue'
+import ExecutionListComponent from '@/components/workflowexec/ExecutionListComponent.vue'
 
 import { MdToolbar,
          MdApp,
@@ -26,9 +27,14 @@ const routes = [
     component: NavbarComponent,
     children: [
       {
-        path: 'dashboard',
-        meta: { title: 'Dashboard' },
-        component: DashboardComponent
+        path: 'projects',
+        meta: { title: 'Projects' },
+        component: ProjectListComponent
+      },
+      {
+        path: 'projects/executions',
+        meta: { title: 'executions' },
+        component: ExecutionListComponent
       }
     ]
   }
