@@ -1,5 +1,6 @@
 from rest_framework import routers
 from apps.users.views import UserViewSet
+from apps.blackswan.views import ProjectViewSet
 from apps.blackswan.views import WorkflowExecutionViewSet
 
 # Settings
@@ -8,4 +9,5 @@ api.trailing_slash = '/?'
 
 # APIs
 api.register(r'users', UserViewSet)
+api.register(r'projects', ProjectViewSet)
 api.register(r'executions', WorkflowExecutionViewSet)
