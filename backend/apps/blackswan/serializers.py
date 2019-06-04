@@ -6,4 +6,3 @@ class WorkflowExecutionSerializer(ModelSerializer):
     class Meta:
         model = WorkflowExecution
         fields = '__all__'
-
