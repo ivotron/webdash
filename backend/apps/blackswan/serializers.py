@@ -8,7 +8,6 @@ class ProjectSerializer(ModelSerializer):
         model = Project
         fields = '__all__'
 
-
 class WorkflowExecutionSerializer(ModelSerializer):
     class Meta:
         model = WorkflowExecution
