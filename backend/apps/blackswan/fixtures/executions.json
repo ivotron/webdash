@@ -1,0 +1,54 @@
+[
+  {
+    "model": "blackswan.workflowexecution",
+    "pk": 1,
+    "fields": {
+      "project": 1,
+      "revision": "76D7SF687D6SF",
+      "branch": "master",
+      "pr": "https://github.com/johndoe/project_1/pull/5",
+      "ci_url": "https://travis-ci.org/systemslab/popper/builds/538372099?utm_source=github_status&utm_medium=notification",
+      "wf_str": "workflow \"cli tests\" {\r\n  on = \"push\"\r\n  resolves = \"end\"\r\n}\r\naction \"lint\" {\r\n  uses = \"actions/bin/shellcheck@master\"\r\n  args = \"./ci/test/*\"\r\n}\r\n\r\naction \"test ci\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"ci\"\r\n}\r\n\r\naction \"test reuse\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"reuse\"\r\n}\r\n\r\naction \"test actions-demo\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"actions-demo\"\r\n}",
+      "exec_date": "2019-05-22"
+    }
+  },
+  {
+    "model": "blackswan.workflowexecution",
+    "pk": 2,
+    "fields": {
+      "project": 1,
+      "revision": "DASDS67DF9",
+      "branch": "V10",
+      "pr": "https://github.com/johndoe/project_1/pull/56",
+      "ci_url": "https://travis-ci.org/systemslab/popper/builds/538372099?utm_source=github_status&utm_medium=notification",
+      "wf_str": "workflow \"cli tests\" {\r\n  on = \"push\"\r\n  resolves = \"end\"\r\n}\r\naction \"lint\" {\r\n  uses = \"actions/bin/shellcheck@master\"\r\n  args = \"./ci/test/*\"\r\n}\r\n\r\naction \"test ci\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"ci\"\r\n}\r\n\r\naction \"test reuse\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"reuse\"\r\n}\r\n\r\naction \"test actions-demo\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"actions-demo\"\r\n}",
+      "exec_date": "2019-04-16"
+      }
+    },
+    {
+      "model": "blackswan.workflowexecution",
+      "pk": 3,
+      "fields": {
+        "project": 1,
+        "revision": "HD3D6A7SDFG42D",
+        "branch": "V2.0",
+        "pr": "https://github.com/johndoe/project_1/pull/25",
+        "ci_url": "https://travis-ci.org/systemslab/popper/builds/538372099?utm_source=github_status&utm_medium=notification",
+        "wf_str": "workflow \"cli tests\" {\r\n  on = \"push\"\r\n  resolves = \"end\"\r\n}\r\naction \"lint\" {\r\n  uses = \"actions/bin/shellcheck@master\"\r\n  args = \"./ci/test/*\"\r\n}\r\n\r\naction \"test ci\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"ci\"\r\n}\r\n\r\naction \"test reuse\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"reuse\"\r\n}\r\n\r\naction \"test actions-demo\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"actions-demo\"\r\n}",
+        "exec_date": "2019-01-09"
+      }
+    },
+    {
+      "model": "blackswan.workflowexecution",
+      "pk": 4,
+      "fields": {
+        "project": 1,
+        "revision": "HD5365DS6DAS",
+        "branch": "V2.0.1",
+        "pr": "https://github.com/johndoe/project_1/pull/56",
+        "ci_url": "https://travis-ci.org/systemslab/popper/builds/538372099?utm_source=github_status&utm_medium=notification",
+        "wf_str": "workflow \"cli tests\" {\r\n  on = \"push\"\r\n  resolves = \"end\"\r\n}\r\naction \"lint\" {\r\n  uses = \"actions/bin/shellcheck@master\"\r\n  args = \"./ci/test/*\"\r\n}\r\n\r\naction \"test ci\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"ci\"\r\n}\r\n\r\naction \"test reuse\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"reuse\"\r\n}\r\n\r\naction \"test actions-demo\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"actions-demo\"\r\n}\r\n\r\naction \"test validate\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"validate\"\r\n}\r\n\r\naction \"test scaffold\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"scaffold\"\r\n}\r\n\r\naction \"test recursive\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"recursive\"\r\n}\r\n\r\naction \"test dry-run\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"dry-run\"\r\n}\r\n\r\naction \"test parallel\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"parallel\"\r\n}\r\n\r\naction \"test dot\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"dot\"\r\n}\r\n\r\naction \"test singularity\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"singularized\"\r\n}\r\n\r\naction \"test interrupt\" {\r\n  needs = \"lint\"\r\n  uses = \"./ci/test\"\r\n  runs = \"interrupt\"\r\n}",
+        "exec_date": "2019-06-03"
+      }
+    }
+  ]
