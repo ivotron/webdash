@@ -2,7 +2,7 @@
     <div class="page-container md-layout-row">
     <md-app>
       <md-app-toolbar class="md-primary">
-        <md-button class="md-icon-button">
+        <md-button class="md-icon-button" @click="back">
           <md-icon>keyboard_arrow_left</md-icon>
         </md-button>
         <span class="md-title">{{ $route.meta.title }}</span>
@@ -19,6 +19,9 @@
             <span class="md-list-item-text">Projects</span>
           </md-list-item>
         </md-list>
+        <md-button class="md-icon-button logout">
+          <md-icon>exit_to_app</md-icon>
+        </md-button>
       </md-app-drawer>
 
       <md-app-content>
@@ -41,12 +44,19 @@
     width: 230px;
     max-width: calc(100vw - 125px);
   }
+  .logout {
 
+  }
 </style>
 
 <script>
   export default {
-    name: 'PermanentFull'
+    name: 'PermanentFull',
+  methods: {
+    back() {
+      this.$router.go(-1)
+    }
   }
+}
 
 </script>
