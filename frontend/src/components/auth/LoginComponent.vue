@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     auth() {
-      this.$store.dispatch('postLogin', {email:this.email, password:this.password})
+      this.$store.dispatch('login', {email:this.login.email, password:this.login.password})
         .then(() => {
           this.$router.push('/projects')
         })

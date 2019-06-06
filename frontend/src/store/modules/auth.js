@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const state = {
-  loggedIn: false,
+  token: null,
   profile: {},
   validation: { email: true },
   authError: false
@@ -10,11 +10,8 @@ const state = {
 const getters = {}
 
 const mutations = {
-  login (state) {
-    state.loggedIn = true
-  },
-  logout (state) {
-    state.loggedIn = false
+  setToken(state, payload) {
+    state.token = payload
   },
   setProfile (state, payload) {
     state.profile = payload
@@ -26,15 +23,20 @@ const mutations = {
     state.authError = bool
   }
 }
-
 const actions = {
-  postLogin (context, payload) {
-    return axios.post('/api/users/login/', payload)
-      .then(response => {})
+  login (context, payload) {
+    return axios.post('/auth/login/', payload)
+      .then(response => {
+        console.log(response)
+        context.commit('setToken', response.data.key)
+      })
       .catch(e => {
         context.commit('setAuthError', true)
         console.log(e)
       })
+  },
+  logout(context) {
+    context.commit('setToken', null)
   },
   postRegister (context, payload) {
     return axios.post('/api/users/register/', payload)
