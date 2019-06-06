@@ -4,6 +4,7 @@ const state = {
   token: null,
   profile: {},
   validation: { email: true },
+  user: null,
   authError: false
 }
 
@@ -21,6 +22,9 @@ const mutations = {
   },
   setAuthError (state, bool) {
     state.authError = bool
+  },
+  setUser (state, payload) {
+    state.user = payload
   }
 }
 const actions = {
@@ -29,6 +33,11 @@ const actions = {
       .then(response => {
         console.log(response)
         context.commit('setToken', response.data.key)
+        return axios.get('/auth/user', { headers: { 'Authorization':`Token ${response.data.key}` } } )
+      })
+      .then(response => {
+        console.log(response)
+        context.commit('setUser', response.data)
       })
       .catch(e => {
         context.commit('setAuthError', true)

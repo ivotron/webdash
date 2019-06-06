@@ -30,12 +30,14 @@ const routes = [
     component: NavbarComponent,
     children: [
       {
-        path: 'projects',
+        path: ':user/projects',
+        name: 'projects',
         meta: { title: 'Projects' },
         component: ProjectListComponent
       },
       {
-        path: 'projects/executions',
+        path: 'projects/:id/executions',
+        name: 'executions',
         meta: { title: 'Executions' },
         component: ExecutionListComponent
       }

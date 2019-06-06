@@ -205,11 +205,14 @@ AUTHENTICATION_BACKENDS = [
 
     'django.contrib.auth.backends.ModelBackend',
 ]
-
+ 
 # Custom user app defaults
 # Select the correct user model
 AUTH_USER_MODEL = 'users.User'
-
+REST_AUTH_SERIALIZERS = { 'USER_DETAILS_SERIALIZER':'apps.users.serializers.UserSerializer' }
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
 
 # DJANGO REST FRAMEWORK
 # ------------------------------------------------------------------------------
