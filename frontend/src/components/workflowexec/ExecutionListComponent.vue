@@ -3,7 +3,7 @@
     <md-card md-with-hover>
       <md-ripple>
         <md-card-header>
-          <div class="md-title">Popper 2.0</div>
+          <div class="md-title">{{ this.$route.params.project }}</div>
           <div class="md-subhead">By: CROSS</div>
         </md-card-header>
 
@@ -21,8 +21,8 @@
 
       <md-table-row slot="md-table-row" slot-scope="{ item }">
         <md-table-cell md-label="ID" md-sort-by="id" md-numeric>{{ item.id }}</md-table-cell>
-        <md-table-cell md-label="Name" md-sort-by="title">{{ item.title }}</md-table-cell>
-        <md-table-cell md-label="Date of commit" md-sort-by="date">{{ item.date }}</md-table-cell>
+        <md-table-cell md-label="Revision" md-sort-by="title">{{ item.revision }}</md-table-cell>
+        <md-table-cell md-label="Branch" md-sort-by="date">{{ item.branch }}</md-table-cell>
       </md-table-row>
     </md-table>
   </div>
@@ -38,6 +38,7 @@
 </style>
 
 <script>
+import axios from 'axios'
 const toLower = text => {
   return text.toString().toLowerCase()
 }
@@ -47,21 +48,14 @@ export default {
   data: () => ({
     search: null,
     searched: [],
-    projects: [
-      {
-        id: 1,
-        title: "Add new action",
-        date: "26/12/19"
-      },
-      {
-        id: 2,
-        title: "Fix previous action",
-        date: "27/12/19"
-      }
-    ]
+    executions: []
   }),
   created () {
-    this.searched = this.projects
+    axios.get(`/api/executions?project=${this.$route.params.project}`, { headers: { 'Authorization':`Token ${this.$store.state.auth.token}` } })
+      .then(response => {
+        this.executions = response.data
+        this.searched = this.executions
+      })
   }
 }
 </script>
