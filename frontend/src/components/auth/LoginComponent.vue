@@ -49,7 +49,8 @@ export default {
     auth() {
       this.$store.dispatch('login', {email:this.login.email, password:this.login.password})
         .then(() => {
-          this.$router.push('/projects')
+          console.log(this.$store)
+          this.$router.push({ name:'projects', params: { user:this.$store.state.auth.user.email }})
         })
     }
   }

@@ -1,7 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from apps.blackswan.models import WorkflowExecution
-from apps.blackswan.models import Project
-
+from apps.blackswan.models import WorkflowExecution, Project
 
 class ProjectSerializer(ModelSerializer):
     class Meta:

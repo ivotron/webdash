@@ -19,7 +19,7 @@
             <span class="md-list-item-text">Projects</span>
           </md-list-item>
         </md-list>
-        <md-button class="md-icon-button logout">
+        <md-button class="md-icon-button logout" @click="logOut">
           <md-icon>exit_to_app</md-icon>
         </md-button>
       </md-app-drawer>
@@ -50,11 +50,19 @@
 </style>
 
 <script>
+import axios from 'axios'
+
   export default {
     name: 'PermanentFull',
   methods: {
     back() {
       this.$router.go(-1)
+    },
+    logOut () {
+      axios.post('/auth/logout/', {}, { headers: { 'Authorization':`Token ${this.$store.state.auth.token}` } })
+        .then(response => {
+          this.$router.push({ name: 'login' })
+        })
     }
   }
 }

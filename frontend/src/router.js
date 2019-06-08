@@ -17,7 +17,8 @@ import { MdToolbar,
          MdField,
          MdCard,
          MdRipple,
-         MdProgress
+         MdProgress,
+         MdEmptyState
        } from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
 
@@ -30,12 +31,14 @@ const routes = [
     component: NavbarComponent,
     children: [
       {
-        path: 'projects',
+        path: ':user/projects',
+        name: 'projects',
         meta: { title: 'Projects' },
         component: ProjectListComponent
       },
       {
-        path: 'projects/executions',
+        path: ':user/:project/executions',
+        name: 'executions',
         meta: { title: 'Executions' },
         component: ExecutionListComponent
       }
@@ -43,6 +46,7 @@ const routes = [
   },
   {
     path: '/login',
+    name: 'login',
     component: LoginComponent
   }
 ]
@@ -58,6 +62,7 @@ Vue.use(MdCard)
 Vue.use(MdRipple)
 Vue.use(MdButton)
 Vue.use(MdProgress)
+Vue.use(MdEmptyState)
 const router = new VueRouter({
   scrollBehavior (to, from, savedPosition) { return { x: 0, y: 0 } },
   mode: 'history',
