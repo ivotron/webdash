@@ -8,20 +8,19 @@
         <span class="md-title">{{ $route.meta.title }}</span>
       </md-app-toolbar>
 
-      <md-app-drawer md-permanent="full">
+      <md-app-drawer :md-active.sync="menuVisible" md-persistent="mini">
         <md-toolbar class="md-transparent" md-elevation="0">
           Blackswan
         </md-toolbar>
 
-        <md-list>
-          <md-list-item to="/projects">
+        <md-list class="md-toolbar-section-end">
+          <md-list-item @click="goToProjects">
             <md-icon>view_list</md-icon>
-            <span class="md-list-item-text">Projects</span>
+          </md-list-item>
+          <md-list-item @click="logOut">
+            <md-icon>exit_to_app</md-icon>
           </md-list-item>
         </md-list>
-        <md-button class="md-icon-button logout" @click="logOut">
-          <md-icon>exit_to_app</md-icon>
-        </md-button>
       </md-app-drawer>
 
       <md-app-content>
@@ -38,22 +37,23 @@
   }
   .md-app {
     min-height: 100vh;
-    border: 1px solid rgba(#000, .12);
+    min-width: 1vh;
+    border: 1px solid rgba(#000, 0);
   }
   .md-drawer {
     width: 230px;
     max-width: calc(100vw - 125px);
-  }
-  .logout {
-
   }
 </style>
 
 <script>
 import axios from 'axios'
 
-  export default {
-    name: 'PermanentFull',
+export default {
+  name: 'PermanentMini',
+  data: () => ({
+    menuVisible: false
+  }),
   methods: {
     back() {
       this.$router.go(-1)
@@ -63,6 +63,9 @@ import axios from 'axios'
         .then(response => {
           this.$router.push({ name: 'login' })
         })
+    },
+    goToProjects () {
+      this.$router.push({ name:'projects', params: { user:this.$store.state.auth.user.email }})
     }
   }
 }

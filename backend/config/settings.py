@@ -240,7 +240,7 @@ RAVEN_MIDDLEWARE = [
 MIDDLEWARE = RAVEN_MIDDLEWARE + MIDDLEWARE
 
 # Sentry Configuration
-SENTRY_DSN = env.str('SENTRY_DSN')
+SENTRY_DSN = "https://8510bd535afd43e397c6dfe9b00dfe85@sentry.io/1479977"
 SENTRY_CLIENT = 'raven.contrib.django.raven_compat.DjangoClient'
 LOGGING = {
     'version': 1,
