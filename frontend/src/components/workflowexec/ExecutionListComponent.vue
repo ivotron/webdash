@@ -4,7 +4,7 @@
       <md-ripple>
         <md-card-header>
           <div class="md-title">{{ this.$route.params.project }}</div>
-          <div class="md-subhead">By: CROSS</div>
+          <div class="md-subhead">By: {{ this.$store.state.auth.user.email }}</div>
         </md-card-header>
 
         <md-card-content md-med>
@@ -20,9 +20,12 @@
       </md-table-toolbar>
 
       <md-table-row slot="md-table-row" slot-scope="{ item }">
-        <md-table-cell md-label="ID" md-sort-by="id" md-numeric>{{ item.id }}</md-table-cell>
-        <md-table-cell md-label="Revision" md-sort-by="title">{{ item.revision }}</md-table-cell>
-        <md-table-cell md-label="Branch" md-sort-by="date">{{ item.branch }}</md-table-cell>
+        <md-table-cell md-label="Commit" md-sort-by="id" md-numeric>{{ item.id }}</md-table-cell>
+        <md-table-cell md-label="Pull request" md-sort-by="title">{{ item.revision }}</md-table-cell>
+        <md-table-cell md-label="Branch" md-sort-by="branch">{{ item.branch }}</md-table-cell>
+        <md-table-cell md-label="Execution #" md-sort-by="branch">{{ item.exec_number }}</md-table-cell>
+        <md-table-cell md-label="Execution date" md-sort-by="branch">{{ item.exec_date }}</md-table-cell>
+        <md-table-cell md-label="State" md-sort-by="state">{{ item.state }}</md-table-cell>
       </md-table-row>
     </md-table>
   </div>
