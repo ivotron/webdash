@@ -5,20 +5,22 @@ import NavbarComponent from '@/components/NavbarComponent.vue'
 import ProjectListComponent from '@/components/project/ProjectListComponent.vue'
 import ExecutionListComponent from '@/components/workflowexec/ExecutionListComponent.vue'
 import LoginComponent from '@/components/auth/LoginComponent.vue'
+import GraphComponent from '@/components/tests/GraphComponent.vue'
 
-import { MdToolbar,
-         MdApp,
-         MdButton,
-         MdDrawer,
-         MdList,
-         MdIcon,
-         MdContent,
-         MdTable,
-         MdField,
-         MdCard,
-         MdRipple,
-         MdProgress,
-         MdEmptyState
+import {
+        MdToolbar,
+        MdApp,
+        MdButton,
+        MdDrawer,
+        MdList,
+        MdIcon,
+        MdContent,
+        MdField,
+        MdCard,
+        MdRipple,
+        MdProgress,
+        MdEmptyState,
+        MdTable
        } from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
@@ -47,6 +49,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginComponent
+  },
+  {
+    path: '/tests',
+    name: 'tests',
+    component: GraphComponent
   }
 ]
 Vue.use(VueRouter)
