@@ -16,5 +16,14 @@ module.exports = {
       poll: 1000,
       ignored: '/app/node_modules/'
     }
+  },
+  chainWebpack: config => {
+    // GraphQL Loader
+    config.module
+      .rule('typescript')
+      .test(/\.ts$/)
+      .use('graphql-tag/loader')
+        .loader('graphql-tag/loader')
+        .end()
   }
 }

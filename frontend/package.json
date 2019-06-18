@@ -10,14 +10,17 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "gojs": "^2.0.12",
     "register-service-worker": "^1.5.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
+    "typescript": "^3.5.2",
     "vue": "^2.5.17",
     "vue-analytics": "^5.16.0",
     "vue-material": "^1.0.0-beta-11",
     "vue-raven": "^1.0.0",
     "vue-router": "^3.0.1",
+    "vue-ts-loader": "0.0.3",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
