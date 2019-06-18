@@ -1,50 +1,46 @@
 <template>
-  <div style="border: solid 1px black; width:400px; height:400px"></div>
+  <div style="border:solid 1px black; width:400px; height:400px;"></div>
 </template>
 
 
 <script>
   import go from 'gojs';
-  var $ = go.GraphObject.make;
 
-  // This works because we have overridden the /extensionsTS/tsconfig.json file
-  // in the options to the loader: 'ts-loader', in the webpack.config.js
+  var $ = go.GraphObject.make;  // for conciseness
 
   export default {
-    name: 'Diagram',
-    mounted() {
-      var diagram =
+      mounted: function() {
+        var diagram =
         $(go.Diagram, this.$el, {
-          "undoManager.isEnabled": true,
-          "grid.visible": true,
-          "grid.gridCellSize": new go.Size(30, 30),
+            "undoManager.isEnabled": true,
+            "grid.gridCellSize": new go.Size(30, 30),
         });
 
+      // define a simple Node template
         diagram.nodeTemplate =
-          $(go.Node, "Vertical",
-            {
-              locationSpot: go.Spot.Center,
-              locationObjectName: "SHAPE",
-              selectionAdorned: false,
-              resizable: true, resizeObjectName: "SHAPE",
-              rotatable: true, rotateObjectName: "SHAPE",
-              layoutConditions: go.Part.LayoutStandard & ~go.Part.LayoutNodeSized
-            },
-            new go.Binding("layerName", "isHighlighted", function(h) { return h ? "Foreground" : ""; }).ofObject(),
-            $(go.Shape,
-              {
-                name: "SHAPE",
-                width: 70, height: 70,
-                stroke: "#C2185B",
-                fill: "#F48FB1",
-                strokeWidth: 3
-              },
-            )
-          );
-      diagram.startTransaction('new object');
-      diagram.model.addNodeData({});
-      diagram.model.addNodeData({});
-      diagram.commitTransaction('new object');
-    }
+          $(go.Node, "Auto",  // the Shape will go around the TextBlock
+            $(go.Shape, "RoundedRectangle",
+              // Shape.fill is bound to Node.data.color
+              new go.Binding("fill", "color")),
+            $(go.TextBlock,
+              { margin: 3 },  // some room around the text
+              // TextBlock.text is bound to Node.data.key
+            new go.Binding("text", "key"))
+        );
+        diagram.model = new go.GraphLinksModel(
+        [
+          { key: "Alpha", color: "lightblue" },
+          { key: "Beta", color: "orange" },
+          { key: "Gamma", color: "lightgreen" },
+          { key: "Delta", color: "pink" }
+        ],
+        [
+          { from: "Alpha", to: "Beta" },
+          { from: "Alpha", to: "Gamma" },
+          { from: "Beta", to: "Beta" },
+          { from: "Gamma", to: "Delta" },
+          { from: "Delta", to: "Alpha" }
+        ]);
+      }
   }
 </script>
