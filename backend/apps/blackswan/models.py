@@ -11,9 +11,7 @@ class Project(models.Model):
 
     @property
     def latest_execution(self):
-        idiota = self.workflowexecution_set.all().order_by('-id').first()
-        logger.error(idiota)
-        return idiota
+        return self.workflowexecution_set.all().order_by('-id').first()
 
 
 class WorkflowExecution(models.Model):

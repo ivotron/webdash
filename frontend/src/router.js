@@ -4,6 +4,9 @@ import VueRouter from 'vue-router'
 import NavbarComponent from '@/components/NavbarComponent.vue'
 import ProjectListComponent from '@/components/project/ProjectListComponent.vue'
 import ExecutionListComponent from '@/components/workflowexec/ExecutionListComponent.vue'
+import ExecutionComponent from '@/components/workflowexec/ExecutionComponent.vue'
+import WorkflowComponent from '@/components/workflowexec/WorkflowComponent.vue'
+import LogComponent from '@/components/workflowexec/LogComponent.vue'
 import LoginComponent from '@/components/auth/LoginComponent.vue'
 import GraphComponent from '@/components/tests/GraphComponent.vue'
 
@@ -42,6 +45,26 @@ const routes = [
         name: 'executions',
         meta: { title: 'Executions' },
         component: ExecutionListComponent
+      },
+      {
+        path: ':user/:project/:execution',
+        name: 'results',
+        meta: { title: 'Results' },
+        component: ExecutionComponent,
+        children: [
+          {
+            path: ':user/:project/:execution',
+            name: 'workflow',
+            meta: { title: 'Workflow' },
+            component: WorkflowComponent
+          },
+          {
+            path: ':user/:project/:execution/log',
+            name: 'log',
+            meta: { title: 'Log' },
+            component: LogComponent
+          }
+        ]
       }
     ]
   },
