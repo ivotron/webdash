@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-card md-with-hover>
+    <md-card>
       <md-ripple>
         <md-card-header>
           <div class="md-title">{{ this.$route.params.project }}</div>

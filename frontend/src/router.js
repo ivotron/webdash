@@ -23,7 +23,8 @@ import {
         MdRipple,
         MdProgress,
         MdEmptyState,
-        MdTable
+        MdTable,
+        MdTab
        } from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
@@ -92,6 +93,7 @@ Vue.use(MdRipple)
 Vue.use(MdButton)
 Vue.use(MdProgress)
 Vue.use(MdEmptyState)
+Vue.use(MdTab)
 const router = new VueRouter({
   scrollBehavior (to, from, savedPosition) { return { x: 0, y: 0 } },
   mode: 'history',
