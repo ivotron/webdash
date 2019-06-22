@@ -19,7 +19,7 @@
         </div>
       </md-table-toolbar>
 
-      <md-table-row slot="md-table-row" slot-scope="{ item }">
+      <md-table-row slot="md-table-row" slot-scope="{ item }" @click.native="openResults(item.id)">
         <md-table-cell md-label="Commit" md-sort-by="id" md-numeric>{{ item.id }}</md-table-cell>
         <md-table-cell md-label="Pull request" md-sort-by="title">{{ item.revision }}</md-table-cell>
         <md-table-cell md-label="Branch" md-sort-by="branch">{{ item.branch }}</md-table-cell>
@@ -53,6 +53,18 @@ export default {
     searched: [],
     executions: []
   }),
+  methods: {
+    openResults (id) {
+      this.$router.push({
+        name: 'results',
+        params: {
+          user:this.$store.state.auth.user.email,
+          project: this.$route.params.project,
+          execution: id
+         }
+       })
+    }
+  },
   created () {
     axios.get(`/api/executions?project=${this.$route.params.project}`, { headers: { 'Authorization':`Token ${this.$store.state.auth.token}` } })
       .then(response => {

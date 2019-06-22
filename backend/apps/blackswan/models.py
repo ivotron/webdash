@@ -6,14 +6,14 @@ logger = logging.getLogger(__name__)
 
 class Project(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    #org
+    #repo
     title = models.CharField(max_length=256)
     repo_url = models.CharField(max_length=256)
 
     @property
     def latest_execution(self):
-        idiota = self.workflowexecution_set.all().order_by('-id').first()
-        logger.error(idiota)
-        return idiota
+        return self.workflowexecution_set.all().order_by('-id').first()
 
 
 class WorkflowExecution(models.Model):

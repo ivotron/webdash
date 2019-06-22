@@ -4,8 +4,10 @@ import VueRouter from 'vue-router'
 import NavbarComponent from '@/components/NavbarComponent.vue'
 import ProjectListComponent from '@/components/project/ProjectListComponent.vue'
 import ExecutionListComponent from '@/components/workflowexec/ExecutionListComponent.vue'
+import ExecutionComponent from '@/components/workflowexec/ExecutionComponent.vue'
+import WorkflowComponent from '@/components/workflowexec/WorkflowComponent.vue'
+import LogComponent from '@/components/workflowexec/LogComponent.vue'
 import LoginComponent from '@/components/auth/LoginComponent.vue'
-import GraphComponent from '@/components/tests/GraphComponent.vue'
 
 import {
         MdToolbar,
@@ -20,10 +22,11 @@ import {
         MdRipple,
         MdProgress,
         MdEmptyState,
-        MdTable
+        MdTable,
+        MdTabs
        } from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
-import 'vue-material/dist/theme/default.css'
+import './default-theme.scss'
 
 
 const routes = [
@@ -42,6 +45,26 @@ const routes = [
         name: 'executions',
         meta: { title: 'Executions' },
         component: ExecutionListComponent
+      },
+      {
+        path: ':user/:project/:execution',
+        name: 'results',
+        meta: { title: 'Results' },
+        component: ExecutionComponent,
+        children: [
+          {
+            path: '/',
+            name: 'log',
+            meta: { title: 'Log' },
+            component: LogComponent
+          },
+          {
+            path: ':user/:project/:execution/workflow',
+            name: 'workflow',
+            meta: { title: 'Workflow' },
+            component: WorkflowComponent
+          }
+        ]
       }
     ]
   },
@@ -49,11 +72,6 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginComponent
-  },
-  {
-    path: '/tests',
-    name: 'tests',
-    component: GraphComponent
   }
 ]
 Vue.use(VueRouter)
@@ -69,6 +87,7 @@ Vue.use(MdRipple)
 Vue.use(MdButton)
 Vue.use(MdProgress)
 Vue.use(MdEmptyState)
+Vue.use(MdTabs)
 const router = new VueRouter({
   scrollBehavior (to, from, savedPosition) { return { x: 0, y: 0 } },
   mode: 'history',
