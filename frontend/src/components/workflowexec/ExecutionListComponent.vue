@@ -59,7 +59,7 @@ export default {
         name: 'results',
         params: {
           user:this.$store.state.auth.user.email,
-          project: this.$store.state.auth.user.email,
+          project: this.$route.params.project,
           execution: id
          }
        })

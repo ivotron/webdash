@@ -8,7 +8,6 @@ import ExecutionComponent from '@/components/workflowexec/ExecutionComponent.vue
 import WorkflowComponent from '@/components/workflowexec/WorkflowComponent.vue'
 import LogComponent from '@/components/workflowexec/LogComponent.vue'
 import LoginComponent from '@/components/auth/LoginComponent.vue'
-import GraphComponent from '@/components/tests/GraphComponent.vue'
 
 import {
         MdToolbar,
@@ -24,10 +23,10 @@ import {
         MdProgress,
         MdEmptyState,
         MdTable,
-        MdTab
+        MdTabs
        } from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
-import 'vue-material/dist/theme/default.css'
+import './default-theme.scss'
 
 
 const routes = [
@@ -54,16 +53,16 @@ const routes = [
         component: ExecutionComponent,
         children: [
           {
-            path: ':user/:project/:execution',
-            name: 'workflow',
-            meta: { title: 'Workflow' },
-            component: WorkflowComponent
-          },
-          {
-            path: ':user/:project/:execution/log',
+            path: '/',
             name: 'log',
             meta: { title: 'Log' },
             component: LogComponent
+          },
+          {
+            path: ':user/:project/:execution/workflow',
+            name: 'workflow',
+            meta: { title: 'Workflow' },
+            component: WorkflowComponent
           }
         ]
       }
@@ -73,11 +72,6 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginComponent
-  },
-  {
-    path: '/tests',
-    name: 'tests',
-    component: GraphComponent
   }
 ]
 Vue.use(VueRouter)
@@ -93,7 +87,7 @@ Vue.use(MdRipple)
 Vue.use(MdButton)
 Vue.use(MdProgress)
 Vue.use(MdEmptyState)
-Vue.use(MdTab)
+Vue.use(MdTabs)
 const router = new VueRouter({
   scrollBehavior (to, from, savedPosition) { return { x: 0, y: 0 } },
   mode: 'history',

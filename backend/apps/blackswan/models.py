@@ -6,6 +6,8 @@ logger = logging.getLogger(__name__)
 
 class Project(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    #org
+    #repo
     title = models.CharField(max_length=256)
     repo_url = models.CharField(max_length=256)
 
