@@ -17,6 +17,9 @@
           <md-list-item @click="goToProjects">
             <md-icon>view_list</md-icon>
           </md-list-item>
+          <md-list-item @click="goToSettings">
+            <md-icon>settings</md-icon>
+          </md-list-item>
           <md-list-item @click="logOut">
             <md-icon>exit_to_app</md-icon>
           </md-list-item>
@@ -66,6 +69,9 @@ export default {
     },
     goToProjects () {
       this.$router.push({ name:'projects', params: { user:this.$store.state.auth.user.email }})
+    },
+    goToSettings () {
+      this.$router.push({ name:'profile', params: { user:this.$store.state.auth.user.email }})
     }
   }
 }
