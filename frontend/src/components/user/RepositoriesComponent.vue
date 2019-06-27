@@ -1,8 +1,8 @@
 <template>
   <div>
     <template v-for="project in projects">
-      <div class="md-layout md-gutter md-align-center">
-        <md-icon clas="md-layout-item md-size-100">book</md-icon>
+      <div class="md-layout md-gutter md-alignment-top-space-between">
+        <md-icon class="md-layout-item md-size-5">book</md-icon>
         <p class="md-layout-item md-size-15">{{ project.title }}</p>
         <md-switch v-model="boolean" class="md-primary md-layout md-size-15">Primary</md-switch>
       </div>

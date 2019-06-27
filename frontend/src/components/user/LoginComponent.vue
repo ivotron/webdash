@@ -4,24 +4,11 @@
 
       <div class="title">
         <div class="md-title">Blackswan</div>
-        <div class="md-body-1">A simple workflow execution viewer</div>
-      </div>
-
-      <div class="form">
-        <md-field>
-          <label>E-mail</label>
-          <md-input v-model="login.email" autofocus></md-input>
-        </md-field>
-
-        <md-field md-has-password>
-          <label>Password</label>
-          <md-input v-model="login.password" type="password"></md-input>
-        </md-field>
+        <div class="md-body-1">Sign in to Github to continue to Blackswan</div>
       </div>
 
       <div class="actions md-layout md-alignment-center-space-between">
-        <a href="/resetpassword">Reset password</a>
-        <md-button class="md-raised md-primary" @click="auth">Log in</md-button>
+        <md-button class="md-raised md-primary" href="https://github.com/login/oauth/authorize?client_id=cc102efd3cc9c51922cb&redirect_uri=http://127.0.0.1/auth/github/">Log in</md-button>
       </div>
 
       <div class="loading-overlay" v-if="loading">

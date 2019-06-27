@@ -64,7 +64,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name='Token',
         default=uuid4,
         editable=False)
-
+    username = models.CharField(
+        verbose_name='Username',
+        max_length=30,
+        editable=False
+    )
     is_admin = models.BooleanField(verbose_name='Admin', default=False)
     is_active = models.BooleanField(verbose_name='Active', default=True)
     is_staff = models.BooleanField(verbose_name='Staff', default=False)

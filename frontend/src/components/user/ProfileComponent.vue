@@ -3,10 +3,8 @@
     <h1>{{ this.$store.state.auth.user.email }}</h1>
     <md-tabs md-sync-route>
       <md-tab id="tab-repos" md-label="Repositories" :to="{name:'repositories',params:{user:this.$store.state.auth.user.email}}" exact>
-        Repositories
       </md-tab>
       <md-tab id="tab-settings" md-label="Settings" :to="{name:'settings',params:{user:this.$store.state.auth.user.email}}">
-        Settings
       </md-tab>
     </md-tabs>
     <router-view></router-view>
