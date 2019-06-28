@@ -1,10 +1,9 @@
 <template>
   <div>
     <template v-for="project in projects">
-      <div class="md-layout md-gutter md-alignment-top-space-between">
+      <div class="md-layout md-gutter md-alignment-top-center">
         <md-icon class="md-layout-item md-size-5">book</md-icon>
-        <p class="md-layout-item md-size-15">{{ project.title }}</p>
-        <md-switch v-model="boolean" class="md-primary md-layout md-size-15">Primary</md-switch>
+        <p class="md-layout-item md-size-95">{{ project.title }}</p>
       </div>
     </template>
   </div>
@@ -14,7 +13,6 @@
 import axios from 'axios'
 export default {
   data: () => ({
-    boolean: false,
     projects: []
   }),
   created () {

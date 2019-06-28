@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <md-field class="md-layout md-gutter md-alignment-top-space-between">
-      <label>Secret key</label>
-      <md-input class="md-layout-item md-size-5" v-model="password" type="password"></md-input>
+  <div class="md-layout">
+    <md-field class="md-layout-item md-size-50 md-small-size-100">
+      <label >Secret key</label>
+      <md-input v-model="password" type="password"></md-input>
     </md-field>
   </div>
 </template>
