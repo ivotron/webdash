@@ -45,7 +45,7 @@ const routes = [
         component: ProfileComponent,
         children: [
           {
-            path: '/',
+            path: '',
             name: 'repositories',
             meta: { title: 'Profile' },
             component: RepositoriesComponent
@@ -77,7 +77,7 @@ const routes = [
         component: ExecutionComponent,
         children: [
           {
-            path: '/',
+            path: '',
             name: 'log',
             meta: { title: 'Log' },
             component: LogComponent

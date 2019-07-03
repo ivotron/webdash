@@ -2,26 +2,15 @@
   <div class="centered-container">
     <md-content class="md-elevation-3">
 
-      <div class="title">
+      <div class="title md-layout-item ">
         <div class="md-title">Blackswan</div>
-        <div class="md-body-1">A simple workflow execution viewer</div>
+        <div class="md-body-1">Sign in to Github to continue to Blackswan</div>
       </div>
 
-      <div class="form">
-        <md-field>
-          <label>E-mail</label>
-          <md-input v-model="login.email" autofocus></md-input>
-        </md-field>
-
-        <md-field md-has-password>
-          <label>Password</label>
-          <md-input v-model="login.password" type="password"></md-input>
-        </md-field>
-      </div>
-
-      <div class="actions md-layout md-alignment-center-space-between">
-        <a href="/resetpassword">Reset password</a>
-        <md-button class="md-raised md-primary" @click="auth">Log in</md-button>
+      <div class="actions md-layout md-gutter md-alignment-center-space-between">
+        <div class="md-layout-item md-size-35"></div>
+        <md-button class="md-raised md-primary md-layout-item" @click="authenticate('github')">Log in</md-button>
+            <div class="md-layout-item md-size-35"></div>
       </div>
 
       <div class="loading-overlay" v-if="loading">
@@ -38,20 +27,20 @@ export default {
   name: "App",
   data() {
     return {
-      loading: false,
-      login: {
-        email: "",
-        password: ""
-      }
+      loading: false
     };
   },
   methods: {
-    auth() {
-      this.$store.dispatch('login', {email:this.login.email, password:this.login.password})
-        .then(() => {
-          console.log(this.$store)
-          this.$router.push({ name:'projects', params: { user:this.$store.state.auth.user.email }})
-        })
+    authenticate: function (provider) {
+      this.$auth.authenticate(provider).then((response) => {
+        const token = response.data.token
+        //localStorage.setItem('user-token', token)
+        return this.$store.dispatch('getUser')
+      }).then(() => {
+        return this.$router.push({ name:'projects', params: { user:this.$store.state.auth.user.username }})
+      }).catch((e) => {
+        console.error(e)
+      })
     }
   }
 };

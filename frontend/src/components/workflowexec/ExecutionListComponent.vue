@@ -58,7 +58,7 @@ export default {
       this.$router.push({
         name: 'results',
         params: {
-          user:this.$store.state.auth.user.email,
+          user:this.$store.state.auth.user.username,
           project: this.$route.params.project,
           execution: id
          }
