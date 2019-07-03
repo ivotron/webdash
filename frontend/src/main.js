@@ -4,9 +4,10 @@ import router from '@/router'
 
 import axios from 'axios'
 
-import VueAnalytics from 'vue-analytics'
-
 import VueRaven from 'vue-raven'
+
+import VueAxios from 'vue-axios'
+import VueAuthenticate from 'vue-authenticate'
 
 import App from '@/App.vue'
 import './registerServiceWorker'
@@ -26,6 +27,18 @@ if (process.env.NODE_ENV === 'production') {
   id: process.env.VUE_APP_GOOGLE_ANALYTICS,
   router
 })*/
+
+Vue.use(VueAxios, axios)
+Vue.use(VueAuthenticate, {
+  baseUrl: 'http://127.0.0.1', // Your API domain
+  tokenPath: 'key',
+  providers: {
+    github: {
+      clientId: 'cc102efd3cc9c51922cb',
+      redirectUri: 'http://127.0.0.1/auth/github/' // Your client app URL
+    }
+  }
+})
 
 new Vue({
   router,

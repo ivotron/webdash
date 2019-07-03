@@ -2,13 +2,15 @@
   <div class="centered-container">
     <md-content class="md-elevation-3">
 
-      <div class="title">
+      <div class="title md-layout-item ">
         <div class="md-title">Blackswan</div>
         <div class="md-body-1">Sign in to Github to continue to Blackswan</div>
       </div>
 
-      <div class="actions md-layout md-alignment-center-space-between">
-        <md-button class="md-raised md-primary" href="https://github.com/login/oauth/authorize?client_id=cc102efd3cc9c51922cb&redirect_uri=http://127.0.0.1/auth/github/">Log in</md-button>
+      <div class="actions md-layout md-gutter md-alignment-center-space-between">
+        <div class="md-layout-item md-size-35"></div>
+        <md-button class="md-raised md-primary md-layout-item" @click="authenticate('github')">Log in</md-button>
+            <div class="md-layout-item md-size-35"></div>
       </div>
 
       <div class="loading-overlay" v-if="loading">
@@ -25,20 +27,20 @@ export default {
   name: "App",
   data() {
     return {
-      loading: false,
-      login: {
-        email: "",
-        password: ""
-      }
+      loading: false
     };
   },
   methods: {
-    auth() {
-      this.$store.dispatch('login', {email:this.login.email, password:this.login.password})
-        .then(() => {
-          console.log(this.$store)
-          this.$router.push({ name:'projects', params: { user:this.$store.state.auth.user.email }})
-        })
+    authenticate: function (provider) {
+      this.$auth.authenticate(provider).then((response) => {
+        const token = response.data.token
+        //localStorage.setItem('user-token', token)
+        return this.$store.dispatch('getUser')
+      }).then(() => {
+        return this.$router.push({ name:'projects', params: { user:this.$store.state.auth.user.username }})
+      }).catch((e) => {
+        console.error(e)
+      })
     }
   }
 };

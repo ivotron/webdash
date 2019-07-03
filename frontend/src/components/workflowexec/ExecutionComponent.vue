@@ -17,8 +17,8 @@
     </md-card>
 
     <md-tabs md-sync-route>
-      <md-tab id="tab-log" md-label="Logs" :to="{name:'log',params:{user:this.$store.state.auth.user.email,project: this.$route.params.project,execution: this.$route.params.execution}}" exact></md-tab>
-      <md-tab id="tab-graph" md-label="Workflow" :to="{name:'workflow',params:{user:this.$store.state.auth.user.email,project: this.$route.params.project,execution: this.$route.params.execution}}"></md-tab>
+      <md-tab id="tab-log" md-label="Logs" :to="{name:'log',params:{user:this.$store.state.auth.user.username,project: this.$route.params.project,execution: this.$route.params.execution}}" exact></md-tab>
+      <md-tab id="tab-graph" md-label="Workflow" :to="{name:'workflow',params:{user:this.$store.state.auth.user.username,project: this.$route.params.project,execution: this.$route.params.execution}}"></md-tab>
     </md-tabs>
     <router-view></router-view>
   </div>

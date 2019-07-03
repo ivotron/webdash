@@ -3,10 +3,15 @@ import axios from 'axios'
 const state = {
   users: [],
   emailFail: false,
-  tokenFail: false
+  tokenFail: false,
+  token: localStorage.getItem('user-token') || '',
+  status: '',
 }
 
-const getters = {}
+const getters = {
+  isAuthenticated: state => !!state.token,
+  authStatus: state => state.status,
+}
 
 const mutations = {
   setUsers (state, users) {
@@ -29,8 +34,8 @@ const actions = {
       .then(response => { context.commit('setUsers', response.data) })
       .catch(e => { console.log(e) })
   },
-  getUser (context, userId) {
-    return axios.get('/api/users/' + userId)
+  getUser (context) {
+    return axios.get('/auth/user/')
       .then(response => { context.commit('setUser', response.data) })
       .catch(e => { console.log(e) })
   },
