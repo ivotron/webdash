@@ -1,5 +1,5 @@
 workflow "smoke tests" {
-  resolves = "run unit tests"
+  resolves = "test"
 }
 
 action "teardown previous" {
