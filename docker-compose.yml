@@ -13,7 +13,6 @@ services:
       - ./backend:/app:z
     command: /start.sh
     entrypoint: /entrypoint.sh
-    restart: on-failure
     env_file: .env
 
   frontend:
@@ -23,7 +22,6 @@ services:
       - ./.env:/app/.env:ro
       - ./frontend:/app:z
     working_dir: /app
-    restart: on-failure
 
   postgres:
     image: postgres:10-alpine
