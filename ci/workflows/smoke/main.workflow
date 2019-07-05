@@ -22,7 +22,7 @@ action "start" {
 action "initialize db" {
   needs = "start"
   uses = "docker://docker/compose:1.24.0"
-  args = ["exec", "backend", "python", "manage.py", "loaddata"]
+  args = ["exec", "-t", "backend", "python", "manage.py", "loaddata"]
 }
 
 action "test" {
