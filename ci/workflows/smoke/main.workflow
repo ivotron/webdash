@@ -2,15 +2,9 @@ workflow "smoke tests" {
   resolves = "test"
 }
 
-action "print things" {
-  uses = "sh"
-  args = "ls"
-}
-
 action "teardown previous" {
   uses = "docker://docker/compose:1.24.0"
   args = "down"
-  needs = "print things"
 }
 
 action "build" {
@@ -28,7 +22,7 @@ action "start" {
 action "initialize db" {
   needs = "start"
   uses = "docker://docker/compose:1.24.0"
-  args = ["exec", "-it", "backend", "python", "manage.py", "loaddata"]
+  args = ["exec", "-it", "backend", "python", "manage.py", "loaddata", "users.json"]
 }
 
 action "test" {
