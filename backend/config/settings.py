@@ -238,6 +238,7 @@ REST_FRAMEWORK = {
     ]
 }
 
-
+FIXTURE_DIRS = ('apps/users/fixtures/',
+                'apps/blackswan/fixtures/',)
 # raven sentry client
 # See https://docs.sentry.io/clients/python/integrations/django/
