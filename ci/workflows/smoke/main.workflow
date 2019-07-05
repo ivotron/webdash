@@ -16,7 +16,7 @@ action "build" {
 action "start" {
   needs = "build"
   uses = "docker://docker/compose:1.24.0"
-  args = ["up", "backend -d"]
+  args = ["up", "-d", "backend"]
 }
 
 action "initialize db" {
