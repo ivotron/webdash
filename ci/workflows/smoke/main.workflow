@@ -22,11 +22,11 @@ action "start" {
 action "initialize db" {
   needs = "start"
   uses = "docker://docker/compose:1.24.0"
-  args = ["exec", "-T", "backend", "python", "manage.py", "loaddata", "users.json"]
+  args = ["exec", "-T", "backend", "python", "manage.py", "loaddata", "users.json", "projects.json", "executions.json"]
 }
 
 action "test" {
   needs = "initialize db"
-  uses = "sh"
-  args = "ls"
+  uses = "docker://docker/compose:1.24.0"
+  args = ["exec", "-T", "backend", "python", "manage.py", "test"]
 }

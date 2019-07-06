@@ -1,3 +1,24 @@
-from django.test import TestCase
+from rest_framework.authtoken.models import Token
+from apps.users.models import User
+from rest_framework.test import APITestCase
+from rest_framework.test import APIClient
 
-# Create your tests here.
+
+class ProjectAPITestCase(APITestCase):
+    fixtures = ['users.json', 'projects.json']
+
+    def test_user_projects(self):
+        print("\nTest: Project query:")
+        client = APIClient()
+        response = client.get('/api/projects/', {})
+        print("Response: ")
+        print(response)
+
+
+    def test_user_projects_login(self):
+        print("\nTest: Project query user:")
+        client = APIClient()
+        client.post('/auth/login/', {'email': 'popper@blackswan.me', 'password': 'password'}, format='json')
+        response = client.get('/api/projects/', {})
+        print("Response: ")
+        print(response.data)
