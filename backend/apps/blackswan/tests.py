@@ -22,3 +22,21 @@ class ProjectAPITestCase(APITestCase):
         response = client.get('/api/projects/', {})
         print("Response: ")
         print(response.data)
+
+
+class ExecutionAPITestCase(APITestCase):
+    fixtures = ['users.json', 'projects.json', 'executions.json']
+
+    def test_executions_project(self):
+        print("\nTest: Execution query:")
+        client = APIClient()
+        response = client.get('/api/executions?project=project_test', {})
+        print("Response: ")
+        print(response.data)
+
+    def test_executions_project_null(self):
+        print("\nTest: Execution query null project:")
+        client = APIClient()
+        response = client.get('/api/executions?project=null_test', {})
+        print("Response: ")
+        print(response.data)
