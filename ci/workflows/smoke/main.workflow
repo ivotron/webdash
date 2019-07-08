@@ -22,23 +22,11 @@ action "start" {
 action "initialize db" {
   needs = "start"
   uses = "docker://docker/compose:1.24.0"
-  args = ["exec", "-T", "backend", "python", "manage.py", "makemigrations"]
-}
-
-action "migrate" {
-  needs = "initialize db"
-  uses = "docker://docker/compose:1.24.0"
-  args = ["exec", "-T", "backend", "python", "manage.py", "migrate"]
-}
-
-action "fixtures" {
-  needs = "migrate"
-  uses = "docker://docker/compose:1.24.0"
   args = ["exec", "-T", "backend", "python", "manage.py", "loaddata", "users.json", "projects.json", "executions.json"]
 }
 
 action "test" {
-  needs = "fixtures"
+  needs = "initialize db"
   uses = "docker://docker/compose:1.24.0"
   args = ["exec", "-T", "backend", "python", "manage.py", "test"]
 }
