@@ -19,14 +19,14 @@ action "start" {
   args = ["up", "-d", "backend"]
 }
 
-action "migrate db" {
+action "sleep" {
   needs = "start"
-  uses = "docker://docker/compose:1.24.0"
-  args = ["exec", "-T", "backend", "python", "manage.py", "migrate"]
+  uses = "maddox/actions/sleep@master"
+  args = "15"
 }
 
 action "initialize db" {
-  needs = "migrate db"
+  needs = "sleep"
   uses = "docker://docker/compose:1.24.0"
   args = ["exec", "-T", "backend", "python", "manage.py", "loaddata", "users.json", "projects.json", "executions.json"]
 }

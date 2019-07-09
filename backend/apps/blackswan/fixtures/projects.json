@@ -12,18 +12,9 @@
     "model": "blackswan.project",
     "pk": 2,
     "fields": {
-      "user": 1,
+      "user": 2,
       "title": "project_test_2",
       "repo_url": "https://github.com/johndoe/project_test_2.git"
-    }
-  },
-  {
-    "model": "blackswan.project",
-    "pk": 3,
-    "fields": {
-      "user": 1,
-      "title": "project_test_3",
-      "repo_url": "https://github.com/johndoe/project_test_3.git"
     }
   },
   {
