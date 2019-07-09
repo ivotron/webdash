@@ -19,8 +19,14 @@ action "start" {
   args = ["up", "-d", "backend"]
 }
 
-action "initialize db" {
+action "migrate db" {
   needs = "start"
+  uses = "docker://docker/compose:1.24.0"
+  args = ["exec", "-T", "backend", "python", "manage.py", "migrate"]
+}
+
+action "initialize db" {
+  needs = "migrate db"
   uses = "docker://docker/compose:1.24.0"
   args = ["exec", "-T", "backend", "python", "manage.py", "loaddata", "users.json", "projects.json", "executions.json"]
 }
