@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth import logout
 from django.conf.urls import include, url
 from config.api import api
-from apps.users.views import GitHubLogin
+from apps.blackswan.views import GitHubLogin
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
