@@ -41,8 +41,7 @@ THIRD_PARTY_APPS = [
 SITE_ID = 1
 
 LOCAL_APPS = [
-    'apps.users',
-    'apps.blackswan',
+    'apps.blackswan'
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -214,8 +213,8 @@ AUTHENTICATION_BACKENDS = [
 
 # Custom user app defaults
 # Select the correct user model
-AUTH_USER_MODEL = 'users.User'
-REST_AUTH_SERIALIZERS = { 'USER_DETAILS_SERIALIZER':'apps.users.serializers.UserSerializer' }
+AUTH_USER_MODEL = 'blackswan.User'
+REST_AUTH_SERIALIZERS = { 'USER_DETAILS_SERIALIZER':'apps.blackswan.serializers.UserSerializer' }
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
@@ -238,7 +237,6 @@ REST_FRAMEWORK = {
     ]
 }
 
-FIXTURE_DIRS = ('apps/users/fixtures/',
-                'apps/blackswan/fixtures/',)
+FIXTURE_DIRS = ('apps/blackswan/fixtures/')
 # raven sentry client
 # See https://docs.sentry.io/clients/python/integrations/django/

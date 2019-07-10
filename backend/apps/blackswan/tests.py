@@ -1,35 +1,37 @@
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 from rest_framework.test import APIClient
-from apps.users.models import User
-from apps.blackswan.models import Project, WorkflowExecution
-import json
+from apps.blackswan.models import Project, WorkflowExecution, User
 
 
-class ProjectAPITestCase(APITestCase):
+class APITestCase(APITestCase):
     def setUp(self):
         user = User.objects.create(id=1, email='popper@blackswan.me',
                             password='password')
         user.set_password('password')
         user.save()
         self.user = user
+
         user2 = User.objects.create(id=2, email='popper2@blackswan.me',
                             password='password')
         user2.set_password('password')
         user2.save()
         self.user2 = user2
+
         project = Project.objects.create(id=1, user=User.objects.get(id=1),
             title="project_test",
             repo_url="https://github.com/johndoe/project_test.git"
         )
         self.project = project
         project.save()
+
         project2 = Project.objects.create(id=2, user=User.objects.get(id=2),
             title="project_test2",
             repo_url="https://github.com/johndoe/project_test2.git"
         )
         self.project2 = project2
         project2.save()
+
         execution = WorkflowExecution.objects.create(id=1, project=Project.objects.get(id=2),
             revision='76D7SF687D6SF', branch='master', state='running',
             pr='https://github.com/johndoe/project_1/pull/5',
@@ -39,6 +41,22 @@ class ProjectAPITestCase(APITestCase):
         )
         self.execution = execution
         execution.save()
+
+    def test_valid_user(self):
+        client = APIClient()
+        response = client.post('/auth/login/', {'email': self.user.email,
+                                                'password': 'password'},
+                               format='json')
+        token = Token.objects.get(user__email=self.user.email)
+        client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+        self.assertEqual(response.status_code, 200)
+
+    def test_invalid_user(self):
+        client = APIClient()
+        response = client.post('/auth/login/', {'email': 'popper@blkswan.me',
+                                                'password': 'password'},
+                               format='json')
+        self.assertEqual(response.status_code, 400)
 
     def test_user_projects(self):
         client = APIClient()

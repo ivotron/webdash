@@ -1,5 +1,12 @@
 from rest_framework import serializers
-from apps.blackswan.models import WorkflowExecution, Project
+from apps.blackswan.models import User, WorkflowExecution, Project
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('email', 'username')
+        read_only_fields = ('email', 'username')
 
 
 class WorkflowExecutionSerializer(serializers.ModelSerializer):
