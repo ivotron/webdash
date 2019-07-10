@@ -32,4 +32,9 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='blackswan.Project'),
             preserve_default=False,
         ),
+        migrations.AlterField(
+            model_name='user',
+            name='username',
+            field=models.CharField(default='_', editable=False, max_length=30, verbose_name='Username'),
+        ),
     ]

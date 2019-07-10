@@ -4,7 +4,7 @@ from rest_framework.test import APIClient
 from apps.blackswan.models import Project, WorkflowExecution, User
 
 
-class APITestCase(APITestCase):
+class QuerysTestCase(APITestCase):
     def setUp(self):
         user = User.objects.create(id=1, email='popper@blackswan.me',
                             password='password')
