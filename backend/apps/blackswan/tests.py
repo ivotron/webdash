@@ -16,19 +16,16 @@ class ProjectAPITestCase(APITestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_user_projects_login(self):
-        #data = b'[{"id":1,"last_execution":null,"title":"project_test","repo_url":"https://github.com/johndoe/project_test.git","user":1}]'
         data = Project.objects.all()
         data_json = [{'id':obj.id, 'title':obj.title, 'repo_url':obj.repo_url,
-                      'user':obj.user} for obj in data]
-        view = ProjectViewSet.as_view({'get': 'retrieve'})
-        client = APIRequestFactory()
-        client.post('/auth/login/', {'email': 'popper@blackswan.me', 'password': 'password'}, format='json')
-        request = client.get('/api/projects/')
-        response = view(request, pk=1)
-        response.render()
+                      'user':obj.user.id} for obj in data]
+        client = APIClient()
+        client.post('/auth/login/', {'email': 'popper@blackswan.me',
+                                     'password': 'password'}, format='json')
+        response = client.get('/api/projects/', {})
         print(data_json)
         self.assertEqual(response.status_code, 200)
-        self.assertIn(response.content, data_json)
+        self.assertIn(response.data, data_json)
 
 class ExecutionAPITestCase(APITestCase):
     fixtures = ['users.json', 'projects.json', 'executions.json']
