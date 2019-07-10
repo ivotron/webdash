@@ -96,6 +96,9 @@ DATABASES = {
         'PASSWORD': env.str('POSTGRES_PASSWORD'),
         'HOST': 'postgres',
         'PORT': 5432,
+        'TEST': {
+            'NAME': 'test_database'
+        }
     },
 }
 
