@@ -2,15 +2,17 @@ import axios from 'axios'
 
 const state = {
   users: [],
+  user: null,
   emailFail: false,
   tokenFail: false,
-  token: localStorage.getItem('user-token') || '',
+  token: sessionStorage.getItem('user-token') || '',
   status: '',
 }
 
 const getters = {
   isAuthenticated: state => !!state.token,
   authStatus: state => state.status,
+  userLoaded: state => !!state.user,
 }
 
 const mutations = {
@@ -37,6 +39,12 @@ const actions = {
   getUser (context) {
     return axios.get('/auth/user/')
       .then(response => { context.commit('setUser', response.data) })
+      .catch(e => { console.log(e) })
+  },
+  logOut (context){
+    console.log(context.state)
+    return axios.post('/auth/logout/', {}, { headers: { 'Authorization':`Token ${context.state.token}` } })
+      .then(response => { sessionStorage.removeItem('user-token') })
       .catch(e => { console.log(e) })
   },
   createUser (context, payload) {

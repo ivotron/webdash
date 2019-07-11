@@ -34,7 +34,7 @@ export default {
     authenticate: function (provider) {
       this.$auth.authenticate(provider).then((response) => {
         const token = response.data.token
-        //localStorage.setItem('user-token', token)
+        sessionStorage.setItem('user-token', token)
         return this.$store.dispatch('getUser')
       }).then(() => {
         return this.$router.push({ name:'projects', params: { user:this.$store.state.auth.user.username }})

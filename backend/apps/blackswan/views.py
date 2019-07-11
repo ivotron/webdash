@@ -12,7 +12,7 @@ from rest_framework.authtoken.models import Token
 
 class GitHubLogin(SocialLoginView):
     adapter_class = GitHubOAuth2Adapter
-    callback_url = "http://127.0.0.1/auth/github/"
+    callback_url = "http://127.0.0.1:8000/auth/github/"
     client_class = OAuth2Client
 
 

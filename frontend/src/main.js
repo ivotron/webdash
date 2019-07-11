@@ -30,12 +30,12 @@ if (process.env.NODE_ENV === 'production') {
 
 Vue.use(VueAxios, axios)
 Vue.use(VueAuthenticate, {
-  baseUrl: 'http://127.0.0.1', // Your API domain
+  baseUrl: 'http://127.0.0.1:8000', // Your API domain
   tokenPath: 'key',
   providers: {
     github: {
       clientId: 'cc102efd3cc9c51922cb',
-      redirectUri: 'http://127.0.0.1/auth/github/' // Your client app URL
+      redirectUri: 'http://127.0.0.1:8000/auth/github/' // Your client app URL
     }
   }
 })
