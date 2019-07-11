@@ -29,13 +29,14 @@ if (process.env.NODE_ENV === 'production') {
 })*/
 
 Vue.use(VueAxios, axios)
+console.log(process.env)
 Vue.use(VueAuthenticate, {
-  baseUrl: 'http://127.0.0.1:8000', // Your API domain
+  baseUrl: process.env.VUE_APP_BASE_URL, // Your API domain
   tokenPath: 'key',
   providers: {
     github: {
-      clientId: 'cc102efd3cc9c51922cb',
-      redirectUri: 'http://127.0.0.1:8000/auth/github/' // Your client app URL
+      clientId: process.env.VUE_APP_CLIENT_ID,
+      redirectUri: process.env.VUE_APP_CALLBACK_URL // Your client app URL
     }
   }
 })

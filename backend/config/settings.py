@@ -66,6 +66,8 @@ MIDDLEWARE = [
 DEBUG = env.bool('DEBUG')
 SECRET_KEY = env.str('SECRET_KEY')
 
+#Github callback_url
+CALLBACK_URL = env.str('CALLBACK_URL')
 # DOMAINS
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
 DOMAIN = env.str('DOMAIN')

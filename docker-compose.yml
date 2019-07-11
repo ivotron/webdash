@@ -19,7 +19,7 @@ services:
     image: node:10-alpine
     command: npm run serve
     volumes:
-      - ./.env:/app/.env:ro
+      - ./frontend/.env:/app/.env:ro
       - ./frontend:/app:z
     working_dir: /app
 
