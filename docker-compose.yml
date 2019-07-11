@@ -14,6 +14,8 @@ services:
     command: /start.sh
     entrypoint: /entrypoint.sh
     env_file: .env
+    enviroment:
+      - CALLBACK_URL
 
   frontend:
     image: node:10-alpine
