@@ -14,7 +14,7 @@ services:
     command: /start.sh
     entrypoint: /entrypoint.sh
     env_file: .env
-    enviroment:
+    environment:
       - CALLBACK_URL
 
   frontend:
