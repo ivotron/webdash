@@ -20,14 +20,14 @@
           <md-list-item @click="goToSettings">
             <md-icon>settings</md-icon>
           </md-list-item>
-          <md-list-item @click="logOut">
+          <md-list-item @click="logout">
             <md-icon>exit_to_app</md-icon>
           </md-list-item>
         </md-list>
       </md-app-drawer>
 
       <md-app-content>
-        <router-view></router-view>
+        <router-view v-if="this.$store.getters.userLoaded"></router-view>
       </md-app-content>
 
     </md-app>
@@ -61,8 +61,8 @@ export default {
     back() {
       this.$router.go(-1)
     },
-    logOut () {
-      axios.post('/auth/logout/', {}, { headers: { 'Authorization':`Token ${this.$store.state.auth.token}` } })
+    logout () {
+      return this.$store.dispatch('logOut')
         .then(response => {
           this.$router.push({ name: 'login' })
         })
