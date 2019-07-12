@@ -27,6 +27,9 @@ const mutations = {
   },
   setTokenFail (state, bool) {
     state.tokenFail = bool
+  },
+  setToken (state, token) {
+    state.token = token
   }
 }
 
@@ -37,15 +40,13 @@ const actions = {
       .catch(e => { console.log(e) })
   },
   getUser (context) {
-    return axios.get('/auth/user/')
+    return axios.get('/auth/user/', { headers: { 'Authorization':`Token ${state.token}`} })
       .then(response => { context.commit('setUser', response.data) })
       .catch(e => { console.log(e) })
   },
   logOut (context){
-    console.log(context.state)
-    return axios.post('/auth/logout/', {}, { headers: { 'Authorization':`Token ${context.state.token}` } })
-      .then(response => { sessionStorage.removeItem('user-token') })
-      .catch(e => { console.log(e) })
+    context.commit('setToken', null)
+    sessionStorage.removeItem('user-token')
   },
   createUser (context, payload) {
     var avatar = payload.avatar

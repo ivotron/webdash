@@ -33,6 +33,7 @@ console.log(process.env)
 Vue.use(VueAuthenticate, {
   baseUrl: process.env.VUE_APP_BASE_URL, // Your API domain
   tokenPath: 'key',
+  tokenType: 'Token',
   providers: {
     github: {
       clientId: process.env.VUE_APP_CLIENT_ID,

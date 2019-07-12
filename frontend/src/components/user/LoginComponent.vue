@@ -33,7 +33,9 @@ export default {
   methods: {
     authenticate: function (provider) {
       this.$auth.authenticate(provider).then((response) => {
-        const token = response.data.token
+        const token = response.data.key
+        this.$store.commit('setToken', token)
+        console.log(token);
         sessionStorage.setItem('user-token', token)
         return this.$store.dispatch('getUser')
       }).then(() => {
