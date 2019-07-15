@@ -39,19 +39,19 @@ const routes = [
     component: NavbarComponent,
     children: [
       {
-        path: ':user/profile',
+        path: '/profile',
         name: 'profile',
         meta: { title: 'Profile' },
         component: ProfileComponent,
         children: [
           {
-            path: '',
+            path: '/profile/repositories',
             name: 'repositories',
             meta: { title: 'Profile' },
             component: RepositoriesComponent
           },
           {
-            path: '/settings',
+            path: '/profile/settings',
             name: 'settings',
             meta: { title: 'Profile' },
             component: SettingsComponent
@@ -59,7 +59,7 @@ const routes = [
         ]
       },
       {
-        path: ':user/projects',
+        path: '/projects',
         name: 'projects',
         meta: { title: 'Projects' },
         component: ProjectListComponent

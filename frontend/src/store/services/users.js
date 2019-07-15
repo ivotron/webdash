@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {vueAuth} from '../../main'
 
 const state = {
   users: [],
@@ -34,6 +35,11 @@ const mutations = {
 }
 
 const actions = {
+  resetToken (context) {
+    vueAuth.logout()
+    context.dispatch('logOut')
+      .catch(e => { console.log(e) })
+  },
   getUsersList (context) {
     return axios.get('/api/users')
       .then(response => { context.commit('setUsers', response.data) })
