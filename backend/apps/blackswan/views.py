@@ -24,9 +24,9 @@ class ProjectViewSet(ModelViewSet):
 
     def get_queryset(self):
         queryset = Project.objects.all()
-        user = self.request.query_params.get('email', None)
+        user = self.request.query_params.get('username', None)
         if user is not None:
-            queryset = queryset.filter(user__email=user).order_by('-id')
+            queryset = queryset.filter(user__username=user).order_by('-id')
         else:
             queryset = queryset.filter(user=self.request.user.id).order_by('-id')
         return queryset

@@ -41,7 +41,7 @@ export default {
         sessionStorage.setItem('user-token', token)
         return this.$store.dispatch('getUser')
       }).then(() => {
-        return this.$router.push({ name:'projects'})
+        return this.$router.push({ name:'projects', params: { user:this.$store.state.auth.user.username}})
       }).catch((e) => {
         console.error(e)
       })

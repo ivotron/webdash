@@ -77,7 +77,7 @@ import axios from 'axios'
       }
     },
     created () {
-      axios.get('/api/projects', {}, { headers: { 'Authorization':`Token ${this.$store.state.auth.token}` } })
+      axios.get(`/api/projects?username=${this.$route.params.user}`)
         .then(response => {
           this.projects = response.data
           this.searched = this.projects

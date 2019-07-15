@@ -7,13 +7,15 @@ from apps.blackswan.models import Project, WorkflowExecution, User
 class QuerysTestCase(APITestCase):
     def setUp(self):
         user = User.objects.create(id=1, email='popper@blackswan.me',
-                            password='password')
+                            password='password',
+                            username='JohnDoe')
         user.set_password('password')
         user.save()
         self.user = user
 
         user2 = User.objects.create(id=2, email='popper2@blackswan.me',
-                            password='password')
+                            password='password',
+                            username='JohnDrapper')
         user2.set_password('password')
         user2.save()
         self.user2 = user2
@@ -80,7 +82,7 @@ class QuerysTestCase(APITestCase):
 
     def test_project_with_params(self):
         client = APIClient()
-        response = client.get('/api/projects?email=popper@blackswan.me')
+        response = client.get('/api/projects?username=JohnDoe')
         response.render()
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(response.content, [{'id':self.project.id,
