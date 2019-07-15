@@ -68,10 +68,10 @@ export default {
         })
     },
     goToProjects () {
-      this.$router.push({ name:'projects', params: { user:this.$store.state.auth.user.username }})
+      this.$router.push({ name:'projects'})
     },
     goToSettings () {
-      this.$router.push({ name:'profile', params: { user:this.$store.state.auth.user.username }})
+      this.$router.push({ name:'profile' })
     }
   }
 }

@@ -30,9 +30,13 @@ if (process.env.NODE_ENV === 'production') {
 
 Vue.use(VueAxios, axios)
 console.log(process.env)
-Vue.use(VueAuthenticate, {
+
+export var vueAuth = new VueAuthenticate.factory(Vue.prototype.$http, {
   baseUrl: process.env.VUE_APP_BASE_URL, // Your API domain
   tokenPath: 'key',
+  tokenType: 'Token',
+  logoutUrl: '/auth/logout/',
+  storageType: null,
   providers: {
     github: {
       clientId: process.env.VUE_APP_CLIENT_ID,
@@ -40,6 +44,7 @@ Vue.use(VueAuthenticate, {
     }
   }
 })
+Vue.use(vueAuth)
 
 new Vue({
   router,

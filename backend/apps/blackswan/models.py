@@ -1,5 +1,6 @@
 from uuid import uuid4
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, \
+                                       PermissionsMixin
 from django.db import models
 from django.utils import timezone
 import logging
