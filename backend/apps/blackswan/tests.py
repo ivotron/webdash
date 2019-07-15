@@ -78,6 +78,17 @@ class QuerysTestCase(APITestCase):
                                                 'title':self.project.title,
                                                 'user':self.project.user.id}])
 
+    def test_project_with_params(self):
+        client = APIClient()
+        response = client.get('/api/projects?email=popper@blackswan.me')
+        response.render()
+        self.assertEqual(response.status_code, 200)
+        self.assertJSONEqual(response.content, [{'id':self.project.id,
+                                                'last_execution':getattr(self.project, "last_execution", None),
+                                                'repo_url':self.project.repo_url,
+                                                'title':self.project.title,
+                                                'user':self.project.user.id}])
+
     def test_executions_project_query(self):
         client = APIClient()
         response = client.get('/api/executions?project=null_test')

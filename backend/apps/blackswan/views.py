@@ -9,6 +9,7 @@ from rest_auth.registration.views import SocialLoginView
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from django.conf import settings
+from rest_framework.generics import ListAPIView
 
 
 class GitHubLogin(SocialLoginView):
@@ -21,10 +22,14 @@ class ProjectViewSet(ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
 
-    def list(self, request):
-        queryset = Project.objects.filter(user=request.user.id).order_by('-id')
-        serializer = ProjectSerializer(queryset, many=True)
-        return Response(serializer.data)
+    def get_queryset(self):
+        queryset = Project.objects.all()
+        user = self.request.query_params.get('email', None)
+        if user is not None:
+            queryset = queryset.filter(user__email=user).order_by('-id')
+        else:
+            queryset = queryset.filter(user=self.request.user.id).order_by('-id')
+        return queryset
 
 class WorkflowExecutionViewSet(ModelViewSet):
     queryset = WorkflowExecution.objects.all()
