@@ -60,14 +60,16 @@ class QuerysTestCase(APITestCase):
 
     def test_user_projects(self):
         client = APIClient()
-        response = client.get('/api/projects/', {})
+        response = client.get('/api/projects/')
         self.assertEqual(response.status_code, 200)
 
     def test_user_projects_login(self):
         client = APIClient()
-        log = client.post('/auth/login/', {'email': self.user.email,
+        client.post('/auth/login/', {'email': self.user.email,
                                      'password': 'password'}, format='json')
-        response = client.get('/api/projects/', {})
+        token = Token.objects.get(user__email=self.user.email)
+        client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+        response = client.get('/api/projects/')
         response.render()
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(response.content, [{'id':self.project.id,
@@ -78,7 +80,7 @@ class QuerysTestCase(APITestCase):
 
     def test_executions_project_query(self):
         client = APIClient()
-        response = client.get('/api/executions?project=null_test', {})
+        response = client.get('/api/executions?project=null_test')
         self.assertEqual(response.status_code, 200)
 
     def test_executions_project(self):
