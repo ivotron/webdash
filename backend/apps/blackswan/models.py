@@ -54,14 +54,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name='Email',
         unique=True,
         max_length=255)
-    first_name = models.CharField(
-        verbose_name='First name',
+    full_name = models.CharField(
+        verbose_name='Full name',
         max_length=30,
-        default='first')
-    last_name = models.CharField(
-        verbose_name='Last name',
-        max_length=30,
-        default='last')
+        default='name')
     avatar = models.ImageField(verbose_name='Avatar', blank=True)
     token = models.UUIDField(
         verbose_name='Token',
@@ -112,8 +108,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Project(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    #org
-    #repo
+    organization = models.CharField(max_length=256, default="NA")
+    private = models.BooleanField(default=False)
     title = models.CharField(max_length=256, default="NA")
     repo_url = models.CharField(max_length=256, default="NA")
 
@@ -134,3 +130,4 @@ class WorkflowExecution(models.Model):
     log = models.TextField(default="NA")
     exec_date = models.DateField(default=timezone.now, blank=True, null=True)
     exec_number = models.IntegerField(default=0)
+    username_pr = models.CharField(max_length=256, default="NA")

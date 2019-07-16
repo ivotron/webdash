@@ -1,15 +1,16 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+from rest_framework.generics import ListAPIView
+from rest_auth.registration.views import SocialLoginView
+from allauth.socialaccount.providers.github.views import GitHubOAuth2Adapter
+from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+from django.conf import settings
 from apps.blackswan.serializers import WorkflowExecutionSerializer, \
                                        ProjectSerializer
 from apps.blackswan.models import WorkflowExecution, Project
-from allauth.socialaccount.providers.github.views import GitHubOAuth2Adapter
-from allauth.socialaccount.providers.oauth2.client import OAuth2Client
-from rest_auth.registration.views import SocialLoginView
-from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.authtoken.models import Token
-from django.conf import settings
-from rest_framework.generics import ListAPIView
+from apps.blackswan.permissions import IsOwnerOrPublic
 
 
 class GitHubLogin(SocialLoginView):
@@ -26,12 +27,13 @@ class ProjectViewSet(ModelViewSet):
         queryset = Project.objects.all()
         user = self.request.query_params.get('username', None)
         if user is not None:
-            queryset = queryset.filter(user__username=user).order_by('-id')
+            queryset = queryset.filter(user__username=user).filter(private=False).order_by('-id')
         else:
             queryset = queryset.filter(user=self.request.user.id).order_by('-id')
         return queryset
 
 class WorkflowExecutionViewSet(ModelViewSet):
+    permission_classes = [IsOwnerOrPublic]
     queryset = WorkflowExecution.objects.all()
     serializer_class = WorkflowExecutionSerializer
 
