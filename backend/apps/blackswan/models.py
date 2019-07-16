@@ -92,6 +92,7 @@ class Project(models.Model):
     private = models.BooleanField(default=False)
     repo = models.CharField(max_length=256, default="NA")
     repo_url = models.CharField(max_length=256, default="NA")
+    enabled = models.BooleanField(default=False)
 
     @property
     def latest_execution(self):
