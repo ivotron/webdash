@@ -66,7 +66,7 @@ export default {
     }
   },
   created () {
-    axios.get(`/api/executions?project=${this.$route.params.project}`, { headers: { 'Authorization':`Token ${this.$store.state.auth.token}` } })
+    axios.get(`/api/executions?project=${this.$route.params.project}`)
       .then(response => {
         this.executions = response.data
         this.searched = this.executions

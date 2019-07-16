@@ -59,7 +59,7 @@ const routes = [
         ]
       },
       {
-        path: '/projects',
+        path: ':user/projects',
         name: 'projects',
         meta: { title: 'Projects' },
         component: ProjectListComponent
