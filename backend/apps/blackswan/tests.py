@@ -28,7 +28,7 @@ class QuerysTestCase(APITestCase):
         self.user3 = user3
 
         project = Project.objects.create(id=1, user=User.objects.get(id=1),
-            title="project_test",
+            repo="project_test",
             repo_url="https://github.com/johndoe/project_test.git",
             private=False
         )
@@ -36,7 +36,7 @@ class QuerysTestCase(APITestCase):
         project.save()
 
         project2 = Project.objects.create(id=2, user=User.objects.get(id=1),
-            title="project_test2",
+            repo="project_test2",
             repo_url="https://github.com/johndoe/project_test2.git",
             private=True
         )
@@ -44,7 +44,7 @@ class QuerysTestCase(APITestCase):
         project2.save()
 
         project3 = Project.objects.create(id=3, user=User.objects.get(id=2),
-            title="project_test3",
+            repo="project_test3",
             repo_url="https://github.com/johndoe/project_test3.git",
             private=False
         )
@@ -52,7 +52,7 @@ class QuerysTestCase(APITestCase):
         project3.save()
 
         project4 = Project.objects.create(id=4, user=User.objects.get(id=2),
-            title="project_test4",
+            repo="project_test4",
             repo_url="https://github.com/johndoe/project_test4.git",
             private=True
         )
@@ -60,7 +60,7 @@ class QuerysTestCase(APITestCase):
         project4.save()
 
         project5 = Project.objects.create(id=5, user=User.objects.get(id=3),
-            title="project_test5",
+            repo="project_test5",
             repo_url="https://github.com/johndoe/project_test5.git",
             private=False
         )
@@ -68,7 +68,7 @@ class QuerysTestCase(APITestCase):
         project5.save()
 
         project6 = Project.objects.create(id=6, user=User.objects.get(id=3),
-            title="project_test6",
+            repo="project_test6",
             repo_url="https://github.com/johndoe/project_test6.git",
             private=True
         )
@@ -128,7 +128,7 @@ class QuerysTestCase(APITestCase):
         self.assertJSONEqual(response.content, [{'id':self.project4.id,
                                                  'last_execution':getattr(self.project4, "last_execution", None),
                                                  'repo_url':self.project4.repo_url,
-                                                 'title':self.project4.title,
+                                                 'repo':self.project4.repo,
                                                  'user':self.project4.user.id,
                                                  'organization':self.project4.organization,
                                                  'private':self.project4.private
@@ -136,7 +136,7 @@ class QuerysTestCase(APITestCase):
                                                 {'id':self.project3.id,
                                                 'last_execution':getattr(self.project3, "last_execution", None),
                                                 'repo_url':self.project3.repo_url,
-                                                'title':self.project3.title,
+                                                'repo':self.project3.repo,
                                                 'user':self.project3.user.id,
                                                 'organization':self.project3.organization,
                                                 'private':self.project3.private
@@ -151,7 +151,7 @@ class QuerysTestCase(APITestCase):
         self.assertJSONEqual(response.content, [{'id':self.project.id,
                                                 'last_execution':getattr(self.project, "last_execution", None),
                                                 'repo_url':self.project.repo_url,
-                                                'title':self.project.title,
+                                                'repo':self.project.repo,
                                                 'user':self.project.user.id,
                                                 'organization':self.project.organization,
                                                 'private':self.project.private}])
@@ -179,7 +179,7 @@ class QuerysTestCase(APITestCase):
                                                  'exec_date':self.execution.exec_date,
                                                  'exec_number':self.execution.exec_number,
                                                  'project':self.execution.project.id,
-                                                 'username_pr':self.execution.username_pr
+                                                 'actor':self.execution.actor
                                                 }])
 
     def test_executions_project_private(self):
@@ -203,5 +203,5 @@ class QuerysTestCase(APITestCase):
                                                  'exec_date':self.execution2.exec_date,
                                                  'exec_number':self.execution2.exec_number,
                                                  'project':self.execution2.project.id,
-                                                 'username_pr':self.execution2.username_pr
+                                                 'actor':self.execution2.actor
                                                 }])

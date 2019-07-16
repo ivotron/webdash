@@ -39,8 +39,8 @@ class WorkflowExecutionViewSet(ModelViewSet):
 
     def get_queryset(self):
         queryset = WorkflowExecution.objects.all()
-        project_title = self.request.query_params.get('project', None)
-        if project_title is not None:
+        project_repo = self.request.query_params.get('project', None)
+        if project_repo is not None:
             queryset = queryset.filter(
-                project__title=project_title).order_by('-id')
+                project__repo=project_repo).order_by('-id')
         return queryset

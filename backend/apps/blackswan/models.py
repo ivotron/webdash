@@ -86,31 +86,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name = 'User'
         verbose_name_plural = 'Users'
 
-    @property
-    def full_name(self):
-        return f'{self.first_name} {self.last_name}'
-    full_name.fget.short_description = 'Full name'
-
-    @property
-    def short_name(self):
-        return f'{self.last_name} {self.first_name[0]}.'
-    short_name.fget.short_description = 'Short name'
-
-    def get_full_name(self):
-        return self.full_name
-
-    def get_short_name(self):
-        return self.short_name
-
-    def __str__(self):
-        return self.full_name
-
-
 class Project(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     organization = models.CharField(max_length=256, default="NA")
     private = models.BooleanField(default=False)
-    title = models.CharField(max_length=256, default="NA")
+    repo = models.CharField(max_length=256, default="NA")
     repo_url = models.CharField(max_length=256, default="NA")
 
     @property
@@ -130,4 +110,4 @@ class WorkflowExecution(models.Model):
     log = models.TextField(default="NA")
     exec_date = models.DateField(default=timezone.now, blank=True, null=True)
     exec_number = models.IntegerField(default=0)
-    username_pr = models.CharField(max_length=256, default="NA")
+    actor = models.CharField(max_length=256, default="NA")
