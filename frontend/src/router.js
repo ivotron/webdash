@@ -46,7 +46,7 @@ const routes = [
         component: ProfileComponent,
         children: [
           {
-            path: '/profile/repositories',
+            path: 'repositories',
             name: 'repositories',
             meta: { title: 'Profile' },
             component: RepositoriesComponent

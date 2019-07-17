@@ -51,6 +51,7 @@
 
 <script>
 import axios from 'axios'
+import {vueAuth} from '../main'
 
 export default {
   name: 'PermanentMini',
@@ -62,16 +63,15 @@ export default {
       this.$router.go(-1)
     },
     logout () {
-      return this.$store.dispatch('logOut')
-        .then(response => {
-          this.$router.push({ name: 'login' })
-        })
+      console.log('wtf')
+      vueAuth.setToken({key: null})
+      return this.$router.push({ name: 'login' })
     },
     goToProjects () {
-      this.$router.push({ name:'projects'})
+      this.$router.push({ name:'projects', params: { user:this.$store.state.users.user.username }})
     },
     goToSettings () {
-      this.$router.push({ name:'profile' })
+      this.$router.push({ name:'repositories' })
     }
   }
 }

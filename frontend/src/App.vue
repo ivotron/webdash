@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import {vueAuth} from './main'
 export default {
   name: 'App',
   created() {

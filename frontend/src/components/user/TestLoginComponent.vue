@@ -51,7 +51,7 @@ export default {
       this.$store.dispatch('login', {email:this.login.email, password:this.login.password})
         .then(() => {
           console.log(this.$store)
-          this.$router.push({ name:'projects', params: { user:this.$store.state.auth.user.username }})
+          this.$router.push({ name:'projects', params: { user:this.$store.state.users.user.username }})
         })
     },
     auth2() {
@@ -59,7 +59,7 @@ export default {
         .then(() => {
           return this.$store.dispatch('getUser')
         }).then(() => {
-          this.$router.push({ name:'projects', params: { user:this.$store.state.auth.user.username }})
+          this.$router.push({ name:'projects', params: { user:this.$store.state.users.user.username }})
         })
     }
   }

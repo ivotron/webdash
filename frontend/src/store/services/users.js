@@ -46,7 +46,7 @@ const actions = {
       .catch(e => { console.log(e) })
   },
   getUser (context) {
-    return axios.get('/auth/user/', { headers: { 'Authorization':`Token ${state.token}`} })
+    return axios.get('/auth/user/')
       .then(response => { context.commit('setUser', response.data) })
       .catch(e => { console.log(e) })
   },
@@ -65,8 +65,10 @@ const actions = {
       })
   },
   logOut (context){
+    console.log('ok')
     context.commit('setToken', null)
     sessionStorage.removeItem('user-token')
+    return Promise.resolve()
   },
   createUser (context, payload) {
     var avatar = payload.avatar

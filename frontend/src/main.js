@@ -36,7 +36,6 @@ export var vueAuth = new VueAuthenticate.factory(Vue.prototype.$http, {
   tokenPath: 'key',
   tokenType: 'Token',
   logoutUrl: '/auth/logout/',
-  storageType: null,
   providers: {
     github: {
       clientId: process.env.VUE_APP_CLIENT_ID,
