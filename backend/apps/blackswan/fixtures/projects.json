@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "user": 1,
-      "title": "project_test",
+      "repo": "project_test",
       "repo_url": "https://github.com/johndoe/project_test.git"
     }
   },
@@ -13,7 +13,7 @@
     "pk": 2,
     "fields": {
       "user": 2,
-      "title": "project_test_2",
+      "repo": "project_test_2",
       "repo_url": "https://github.com/johndoe/project_test_2.git"
     }
   },
@@ -22,7 +22,7 @@
     "pk": 4,
     "fields": {
       "user": 2,
-      "title": "blackswan",
+      "repo": "blackswan",
       "repo_url": "https://github.com/ivojimenez/blackswan.git"
     }
   },
@@ -31,7 +31,7 @@
     "pk": 5,
     "fields": {
       "user": 2,
-      "title": "popper",
+      "repo": "popper",
       "repo_url": "https://github.com/ivojimenez/popper.git"
     }
   },
@@ -40,7 +40,7 @@
     "pk": 6,
     "fields": {
       "user": 4,
-      "title": "fulano_finder",
+      "repo": "fulano_finder",
       "repo_url": "https://github.com/fulanito/fulano_finder.git"
     }
   }

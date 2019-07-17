@@ -11,6 +11,7 @@ import LoginComponent from '@/components/user/LoginComponent.vue'
 import ProfileComponent from '@/components/user/ProfileComponent.vue'
 import SettingsComponent from '@/components/user/SettingsComponent.vue'
 import RepositoriesComponent from '@/components/user/RepositoriesComponent.vue'
+import TestLoginComponent from '@/components/user/TestLoginComponent.vue'
 
 import {
         MdToolbar,
@@ -98,9 +99,9 @@ const routes = [
     component: LoginComponent
   },
   {
-    path: '/admin/login',
-    name: 'admin',
-    component: AdminComponent
+    path: '/test',
+    name: 'test',
+    component: TestLoginComponent
   }
 ]
 Vue.use(VueRouter)
