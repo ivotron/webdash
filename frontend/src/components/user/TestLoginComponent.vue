@@ -21,7 +21,7 @@
 
       <div class="actions md-layout md-alignment-center-space-between">
         <a href="/resetpassword">Reset password</a>
-        <md-button class="md-raised md-primary" @click="auth">Log in</md-button>
+        <md-button class="md-raised md-primary" @click="auth2">Log in</md-button>
       </div>
 
       <div class="loading-overlay" v-if="loading">
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import {vueAuth} from '../../main'
 export default {
   name: "App",
   data() {
@@ -50,6 +51,14 @@ export default {
       this.$store.dispatch('login', {email:this.login.email, password:this.login.password})
         .then(() => {
           console.log(this.$store)
+          this.$router.push({ name:'projects', params: { user:this.$store.state.auth.user.username }})
+        })
+    },
+    auth2() {
+      vueAuth.login({email:this.login.email, password:this.login.password}, {url:'/auth/login/'})
+        .then(() => {
+          return this.$store.dispatch('getUser')
+        }).then(() => {
           this.$router.push({ name:'projects', params: { user:this.$store.state.auth.user.username }})
         })
     }

@@ -28,22 +28,6 @@ const mutations = {
   }
 }
 const actions = {
-  login (context, payload) {
-    return axios.post('/auth/login/', payload)
-      .then(response => {
-        console.log(response)
-        context.commit('setToken', response.data.key)
-        return axios.get('/auth/user', { headers: { 'Authorization':`Token ${response.data.key}` } } )
-      })
-      .then(response => {
-        console.log(response)
-        context.commit('setUser', response.data)
-      })
-      .catch(e => {
-        context.commit('setAuthError', true)
-        console.log(e)
-      })
-  },
   logout(context) {
     context.commit('setToken', null)
   },

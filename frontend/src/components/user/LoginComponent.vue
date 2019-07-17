@@ -24,7 +24,6 @@
 
 <script>
 import {vueAuth} from '../../main'
-console.log(vueAuth)
 export default {
   name: "App",
   data() {
