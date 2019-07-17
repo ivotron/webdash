@@ -35,12 +35,9 @@ export default {
     authenticate: function (provider) {
       vueAuth.authenticate(provider).then((response) => {
         const token = response.data.key
-        this.$store.commit('setToken', token)
-        console.log(token);
-        sessionStorage.setItem('user-token', token)
         return this.$store.dispatch('getUser')
       }).then(() => {
-        return this.$router.push({ name:'projects', params: { user:this.$store.state.auth.user.username}})
+        return this.$router.push({ name:'projects', params: { user:this.$store.state.users.user.username}})
       }).catch((e) => {
         console.error(e)
       })
