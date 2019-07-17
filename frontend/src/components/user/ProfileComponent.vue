@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ this.$store.state.auth.user.username }}</h1>
+    <h1>{{ this.$store.state.users.user.username }}</h1>
     <md-tabs md-sync-route>
       <md-tab id="tab-repos" md-label="Repositories" :to="{name:'repositories'}" exact>
         repositories

@@ -46,13 +46,29 @@ const actions = {
       .catch(e => { console.log(e) })
   },
   getUser (context) {
-    return axios.get('/auth/user/', { headers: { 'Authorization':`Token ${state.token}`} })
+    return axios.get('/auth/user/')
       .then(response => { context.commit('setUser', response.data) })
       .catch(e => { console.log(e) })
   },
+  login (context, payload) {
+    console.log(payload)
+    return axios.post('/auth/login/', payload)
+      .then(response => {
+        context.commit('setToken', response.data.key)
+        return vueAuth.setToken(payload)
+      }).then(response => {
+        return context.dispatch('getUser')
+      })
+      .catch(e => {
+        context.commit('setAuthError', true)
+        console.log(e)
+      })
+  },
   logOut (context){
+    console.log('ok')
     context.commit('setToken', null)
     sessionStorage.removeItem('user-token')
+    return Promise.resolve()
   },
   createUser (context, payload) {
     var avatar = payload.avatar

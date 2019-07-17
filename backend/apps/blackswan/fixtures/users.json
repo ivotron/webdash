@@ -1,14 +1,13 @@
 [
   {
-    "model": "users.user",
+    "model": "blackswan.user",
     "pk": 1,
     "fields": {
       "password": "pbkdf2_sha256$120000$cCZkf9FR2Hja$jAx34HmITAjlxN5cImLUsY/5vFOm8YsYkX6WozBtIPI=",
       "last_login": null,
       "is_superuser": false,
       "email": "popper@blackswan.me",
-      "first_name": "John",
-      "last_name": "Doe",
+      "username":"JohnDoe",
       "avatar": "",
       "token": "8c39c909-6eb4-45b4-841e-7b923f851636",
       "is_admin": false,
@@ -20,15 +19,14 @@
     }
   },
   {
-    "model": "users.user",
+    "model": "blackswan.user",
     "pk": 2,
     "fields": {
       "password": "pbkdf2_sha256$120000$nwZB6pwWDtqs$3YXq6KV4Pz3WpFiBhOySlUARM5D220E0eRps0urSMW0=",
       "last_login": null,
       "is_superuser": false,
       "email": "popper2@blackswan.me",
-      "first_name": "Ivo",
-      "last_name": "Jimenez",
+      "username":"DonDrapper",
       "avatar": "",
       "token": "c3124b9b-7628-4ef1-9491-defcea60b0eb",
       "is_admin": false,
@@ -40,15 +38,14 @@
     }
   },
   {
-    "model": "users.user",
+    "model": "blackswan.user",
     "pk": 3,
     "fields": {
       "password": "pbkdf2_sha256$120000$xpE5dsf4n0GZ$VypUXPFdE7SeTzIkxCWORyNQBcT++4EO7mWc0D7FSf4=",
       "last_login": null,
       "is_superuser": false,
       "email": "popper3@blackswan.me",
-      "first_name": "Barbara",
-      "last_name": "Galindo",
+      "username":"BGD",
       "avatar": "",
       "token": "10200f22-da78-41c6-8138-f7d7ceb46d7b",
       "is_admin": false,
@@ -60,15 +57,14 @@
     }
   },
   {
-    "model": "users.user",
+    "model": "blackswan.user",
     "pk": 4,
     "fields": {
       "password": "pbkdf2_sha256$120000$B0WvVhVQa1Eu$Ia1I4XogK//105oUNKwbGBYvKzGCgOCimo1FNVAgx7Y=",
       "last_login": null,
       "is_superuser": false,
       "email": "popper4@blackswan.me",
-      "first_name": "Fulano",
-      "last_name": "De tal",
+      "username":"FulanoDTal",
       "avatar": "",
       "token": "f9b36050-9d0b-4706-9d99-5697323c0623",
       "is_admin": false,

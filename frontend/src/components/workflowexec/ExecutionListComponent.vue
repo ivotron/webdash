@@ -4,7 +4,7 @@
       <md-ripple>
         <md-card-header>
           <div class="md-title">{{ this.$route.params.project }}</div>
-          <div class="md-subhead">By: {{ this.$store.state.auth.user.email }}</div>
+          <div class="md-subhead">By: {{ this.$store.state.users.user.username }}</div>
         </md-card-header>
 
         <md-card-content md-med>
@@ -58,7 +58,7 @@ export default {
       this.$router.push({
         name: 'results',
         params: {
-          user:this.$store.state.auth.user.username,
+          user:this.$store.state.users.user.username,
           project: this.$route.params.project,
           execution: id
          }

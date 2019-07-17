@@ -11,6 +11,7 @@ import LoginComponent from '@/components/user/LoginComponent.vue'
 import ProfileComponent from '@/components/user/ProfileComponent.vue'
 import SettingsComponent from '@/components/user/SettingsComponent.vue'
 import RepositoriesComponent from '@/components/user/RepositoriesComponent.vue'
+import TestLoginComponent from '@/components/user/TestLoginComponent.vue'
 
 import {
         MdToolbar,
@@ -45,7 +46,7 @@ const routes = [
         component: ProfileComponent,
         children: [
           {
-            path: '/profile/repositories',
+            path: 'repositories',
             name: 'repositories',
             meta: { title: 'Profile' },
             component: RepositoriesComponent
@@ -96,6 +97,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginComponent
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: TestLoginComponent
   }
 ]
 Vue.use(VueRouter)
