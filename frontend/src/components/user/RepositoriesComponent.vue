@@ -22,6 +22,17 @@ export default {
       .then(response => {
         this.projects = response.data
       })
+  },
+  methods () {
+    createProject(project){
+      axios.post(`/api/projects/`, {
+        organization:project.organization,
+        private:project.private,
+        repo:project.repo,
+        repo_url:project.repo_url,
+        enabled:true
+        })
+    }
   }
 }
 </script>
