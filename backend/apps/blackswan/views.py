@@ -9,7 +9,9 @@ from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from allauth.socialaccount.models import SocialToken, SocialAccount
 from django.conf import settings
 from apps.blackswan.serializers import WorkflowExecutionSerializer, \
-                                       ProjectSerializer, GithubRepoSerializer
+                                       ProjectSerializer, \
+                                       ProjectPostSerializer, \
+                                       GithubRepoSerializer
 from apps.blackswan.models import WorkflowExecution, Project
 from apps.blackswan.permissions import IsOwnerOrPublic
 from github import Github
@@ -36,6 +38,14 @@ class GitHubRepo(ListAPIView):
 class ProjectViewSet(ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+
+    def get_serializer_class(self, *args, **kwargs):
+        if self.request.method == 'GET':
+            return ProjectSerializer
+        return ProjectPostSerializer
+
+    def get_serializer_context(self):
+        return {'request':self.request}
 
     def get_queryset(self):
         queryset = Project.objects.all()

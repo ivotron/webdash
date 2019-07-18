@@ -15,25 +15,28 @@ class WorkflowExecutionSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ProjectSerializer(serializers.ModelSerializer):
+class ProjectPostSerializer(serializers.ModelSerializer):
     last_execution = WorkflowExecutionSerializer(source='latest_execution',
                                                  read_only=True)
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    def create(self, validated_data):
-        #validated_data['user'] = self.request.user.id
-        project = Project.objects.create(
-            organization = validated_data['organization'],
-            private = validated_data['private'],
-            repo = validated_data['repo'],
-            repo_url = validated_data['repo_url'],
-            github_id = validated_data['github_id'],
-        )
-        return project
+    user = serializers.SerializerMethodField()
+    def get_user(self, obj):
+        return [self.context['request'].user.id]
 
     class Meta:
         read_only_fields = ('last_execution',)
         model = Project
-        fields = '__all__'
+        fields = ['organization', 'private', 'repo', 'repo_url', 'github_id',
+                  'user', 'last_execution']
+
+class ProjectSerializer(serializers.ModelSerializer):
+    last_execution = WorkflowExecutionSerializer(source='latest_execution',
+                                                 read_only=True)
+    user = UserSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Project
+        fields = ['organization', 'private', 'repo', 'repo_url', 'github_id',
+                  'user', 'last_execution']
 
 
 class OwnerSerializer(serializers.Serializer):

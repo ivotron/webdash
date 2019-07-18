@@ -1,14 +1,15 @@
 <template>
   <div>
-    <template v-for="project in projects">
+    <template>
+    <div v-for="project in projects">
       <div class="md-layout md-gutter md-alignment-center-left">
         <md-icon class="md-layout-item md-size-5">book</md-icon>
         <p class="md-layout-item md-size-25">{{ project.repo }}</p>
         <md-switch v-model="boolean" class="md-layout-item md-primary md-size-40">Enable</md-switch>
       </div>
       <md-divider></md-divider>
-    </template>
-    <template v-for="repo in repositories">
+    </div>
+    <div v-for="repo in repositories">
       <div class="md-layout md-gutter md-alignment-center-left">
         <md-icon class="md-layout-item md-size-5">book</md-icon>
         <p class="md-layout-item md-size-25">{{ repo.name }}</p>
@@ -16,7 +17,8 @@
           <md-button class="md-dense md-raised md-primary" @click.native="createProject(repo)">Add project</md-button>
         </div>
       </div>
-    </template>
+    </div>
+  </template>
   </div>
 </template>
 
