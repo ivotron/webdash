@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === 'production') {
 })*/
 
 Vue.use(VueAxios, axios)
-console.log(process.env)
+//console.log(process.env)
 
 export var vueAuth = new VueAuthenticate.factory(Vue.prototype.$http, {
   baseUrl: process.env.VUE_APP_BASE_URL, // Your API domain

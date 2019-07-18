@@ -1,10 +1,20 @@
 <template>
   <div>
     <template v-for="project in projects">
-      <div class="md-layout md-gutter md-alignment-top-center">
+      <div class="md-layout md-gutter md-alignment-center-left">
         <md-icon class="md-layout-item md-size-5">book</md-icon>
-        <p class="md-layout-item md-size-15">{{ project.repo }}</p>
-        <md-switch v-model="boolean" class="md-layout-item md-primary">Enable</md-switch>
+        <p class="md-layout-item md-size-25">{{ project.repo }}</p>
+        <md-switch v-model="boolean" class="md-layout-item md-primary md-size-40">Enable</md-switch>
+      </div>
+      <md-divider></md-divider>
+    </template>
+    <template v-for="repo in repositories">
+      <div class="md-layout md-gutter md-alignment-center-left">
+        <md-icon class="md-layout-item md-size-5">book</md-icon>
+        <p class="md-layout-item md-size-25">{{ repo.name }}</p>
+        <div class="md-layout-item">
+          <md-button class="md-dense md-raised md-primary" @click.native="createProject(repo)">Add project</md-button>
+        </div>
       </div>
     </template>
   </div>
@@ -14,23 +24,28 @@
 import axios from 'axios'
 export default {
   data: () => ({
+    repositories: [],
     projects: [],
     boolean: true
   }),
   created () {
-    axios.get('/api/projects', {}, { headers: { 'Authorization':`Token ${this.$store.state.users.token}` } })
+    axios.get('/auth/github/repo/')
+      .then(response => {
+        this.repositories = response.data
+      })
+    axios.get('/api/projects/')
       .then(response => {
         this.projects = response.data
       })
   },
-  methods () {
-    createProject(project){
+  methods: {
+    createProject(repo){
       axios.post(`/api/projects/`, {
-        organization:project.organization,
-        private:project.private,
-        repo:project.repo,
-        repo_url:project.repo_url,
-        enabled:true
+        organization:repo.owner.organizations_url,
+        repo:repo.name,
+        repo_url:repo.html_url,
+        github_id:repo.id,
+        private:repo.private
         })
     }
   }

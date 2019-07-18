@@ -28,7 +28,8 @@ import {
         MdEmptyState,
         MdTable,
         MdTabs,
-        MdSwitch
+        MdSwitch,
+        MdDivider
        } from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
 import './default-theme.scss'
@@ -72,19 +73,19 @@ const routes = [
         component: ExecutionListComponent
       },
       {
-        path: ':user/:project/:execution',
+        path: '',
         name: 'results',
         meta: { title: 'Results' },
         component: ExecutionComponent,
         children: [
           {
-            path: '',
+            path: ':user/:project/:execution/log',
             name: 'log',
             meta: { title: 'Log' },
             component: LogComponent
           },
           {
-            path: ':user/:project/:execution/workflow',
+            path: 'workflow',
             name: 'workflow',
             meta: { title: 'Workflow' },
             component: WorkflowComponent
@@ -119,6 +120,7 @@ Vue.use(MdProgress)
 Vue.use(MdEmptyState)
 Vue.use(MdTabs)
 Vue.use(MdSwitch)
+Vue.use(MdDivider)
 const router = new VueRouter({
   scrollBehavior (to, from, savedPosition) { return { x: 0, y: 0 } },
   mode: 'history',

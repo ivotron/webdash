@@ -56,7 +56,7 @@ export default {
   methods: {
     openResults (id) {
       this.$router.push({
-        name: 'results',
+        name: 'log',
         params: {
           user:this.$store.state.users.user.username,
           project: this.$route.params.project,

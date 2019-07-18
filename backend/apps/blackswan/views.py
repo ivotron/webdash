@@ -6,17 +6,31 @@ from rest_framework.generics import ListAPIView
 from rest_auth.registration.views import SocialLoginView
 from allauth.socialaccount.providers.github.views import GitHubOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+from allauth.socialaccount.models import SocialToken, SocialAccount
 from django.conf import settings
 from apps.blackswan.serializers import WorkflowExecutionSerializer, \
-                                       ProjectSerializer
+                                       ProjectSerializer, GithubRepoSerializer
 from apps.blackswan.models import WorkflowExecution, Project
 from apps.blackswan.permissions import IsOwnerOrPublic
+from github import Github
 
 
 class GitHubLogin(SocialLoginView):
     adapter_class = GitHubOAuth2Adapter
     callback_url = settings.CALLBACK_URL
     client_class = OAuth2Client
+
+
+class GitHubRepo(ListAPIView):
+    serializer_class = GithubRepoSerializer
+
+    def get_queryset(self):
+        account = SocialAccount.objects.get(user=self.request.user)
+        token = SocialToken.objects.get(account=account)
+        g = Github(token.token)
+        repos = [repo for repo in g.get_user().get_repos()
+                 if not Project.objects.all().filter(github_id=repo.id).exists()]
+        return repos
 
 
 class ProjectViewSet(ModelViewSet):
@@ -31,6 +45,7 @@ class ProjectViewSet(ModelViewSet):
         else:
             queryset = queryset.filter(user=self.request.user.id).order_by('-id')
         return queryset
+
 
 class WorkflowExecutionViewSet(ModelViewSet):
     permission_classes = [IsOwnerOrPublic]
