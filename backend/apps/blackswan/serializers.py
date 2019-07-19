@@ -15,19 +15,6 @@ class WorkflowExecutionSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ProjectPostSerializer(serializers.ModelSerializer):
-    last_execution = WorkflowExecutionSerializer(source='latest_execution',
-                                                 read_only=True)
-    user = serializers.SerializerMethodField()
-    def get_user(self, obj):
-        return [self.context['request'].user.id]
-
-    class Meta:
-        read_only_fields = ('last_execution',)
-        model = Project
-        fields = ['organization', 'private', 'repo', 'repo_url', 'github_id',
-                  'user', 'last_execution']
-
 class ProjectSerializer(serializers.ModelSerializer):
     last_execution = WorkflowExecutionSerializer(source='latest_execution',
                                                  read_only=True)
@@ -35,7 +22,8 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Project
-        fields = ['organization', 'private', 'repo', 'repo_url', 'github_id',
+        read_only = ['user']
+        fields = ['id', 'organization', 'private', 'repo', 'repo_url', 'github_id',
                   'user', 'last_execution']
 
 

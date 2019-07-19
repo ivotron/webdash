@@ -5,10 +5,10 @@
       <div class="md-layout md-gutter md-alignment-center-left">
         <md-icon class="md-layout-item md-size-5">book</md-icon>
         <p class="md-layout-item md-size-25">{{ project.repo }}</p>
-        <md-switch v-model="boolean" class="md-layout-item md-primary md-size-40">Enable</md-switch>
+        <md-switch v-model="boolean" class="md-layout-item md-primary">Enable</md-switch>
       </div>
-      <md-divider></md-divider>
     </div>
+    <md-divider></md-divider>
     <div v-for="repo in repositories">
       <div class="md-layout md-gutter md-alignment-center-left">
         <md-icon class="md-layout-item md-size-5">book</md-icon>
