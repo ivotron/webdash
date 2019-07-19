@@ -5,7 +5,7 @@
       <div class="md-layout md-gutter md-alignment-center-left">
         <md-icon class="md-layout-item md-size-5">book</md-icon>
         <p class="md-layout-item md-size-25">{{ project.repo }}</p>
-        <md-switch v-model="boolean" class="md-layout-item md-primary">Enable</md-switch>
+        <md-switch v-model="project.enabled" class="md-layout-item md-primary" v-on:change="updateProject(project)">Watch project</md-switch>
       </div>
     </div>
     <md-divider></md-divider>
@@ -27,8 +27,7 @@ import axios from 'axios'
 export default {
   data: () => ({
     repositories: [],
-    projects: [],
-    boolean: true
+    projects: []
   }),
   created () {
     axios.get('/auth/github/repo/')
@@ -49,6 +48,9 @@ export default {
         github_id:repo.id,
         private:repo.private
         })
+    },
+    updateProject(repo){
+      axios.patch(`/api/projects/${repo.id}`, {enabled:!repo.enabled})
     }
   }
 }

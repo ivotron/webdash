@@ -138,6 +138,7 @@ class QuerysTestCase(APITestCase):
                                                  'organization':self.project4.organization,
                                                  'private':self.project4.private,
                                                  'github_id':self.project4.github_id,
+                                                 'enabled':self.project4.enabled,
                                                  'user':[{'email':self.user2.email,'username':self.user2.username}]
                                                 },
                                                 {'id':self.project3.id,
@@ -147,6 +148,7 @@ class QuerysTestCase(APITestCase):
                                                 'organization':self.project3.organization,
                                                 'private':self.project3.private,
                                                 'github_id':self.project3.github_id,
+                                                'enabled':self.project4.enabled,
                                                 'user':[{'email':self.user2.email,'username':self.user2.username}]
                                                 }
                                                 ])
@@ -163,6 +165,7 @@ class QuerysTestCase(APITestCase):
                                                 'organization':self.project.organization,
                                                 'private':self.project.private,
                                                 'github_id':self.project.github_id,
+                                                'enabled':self.project4.enabled,
                                                 'user':[{'email':self.user.email,'username':self.user.username}]}])
 
     def test_executions_project_query(self):
