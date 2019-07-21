@@ -6,11 +6,14 @@ from rest_framework.generics import ListAPIView
 from rest_auth.registration.views import SocialLoginView
 from allauth.socialaccount.providers.github.views import GitHubOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+from allauth.socialaccount.models import SocialToken, SocialAccount
 from django.conf import settings
 from apps.blackswan.serializers import WorkflowExecutionSerializer, \
-                                       ProjectSerializer
+                                       ProjectSerializer, \
+                                       GithubRepoSerializer
 from apps.blackswan.models import WorkflowExecution, Project
 from apps.blackswan.permissions import IsOwnerOrPublic
+from github import Github
 
 
 class GitHubLogin(SocialLoginView):
@@ -19,9 +22,24 @@ class GitHubLogin(SocialLoginView):
     client_class = OAuth2Client
 
 
+class GitHubRepo(ListAPIView):
+    serializer_class = GithubRepoSerializer
+
+    def get_queryset(self):
+        account = SocialAccount.objects.get(user=self.request.user)
+        token = SocialToken.objects.get(account=account)
+        g = Github(token.token)
+        repos = [repo for repo in g.get_user().get_repos()
+                 if not Project.objects.all().filter(github_id=repo.id).exists()]
+        return repos
+
+
 class ProjectViewSet(ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+
+    def get_serializer_context(self):
+        return {'request':self.request}
 
     def get_queryset(self):
         queryset = Project.objects.all()
@@ -31,6 +49,10 @@ class ProjectViewSet(ModelViewSet):
         else:
             queryset = queryset.filter(user=self.request.user.id).order_by('-id')
         return queryset
+
+    def perform_create(self, serializer):
+        serializer.save(user=[self.request.user])
+
 
 class WorkflowExecutionViewSet(ModelViewSet):
     permission_classes = [IsOwnerOrPublic]

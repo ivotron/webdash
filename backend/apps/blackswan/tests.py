@@ -27,51 +27,57 @@ class QuerysTestCase(APITestCase):
         user3.save()
         self.user3 = user3
 
-        project = Project.objects.create(id=1, user=User.objects.get(id=1),
+        project = Project.objects.create(id=1,
             repo="project_test",
             repo_url="https://github.com/johndoe/project_test.git",
             private=False
         )
+        project.user.add(self.user)
         self.project = project
         project.save()
 
-        project2 = Project.objects.create(id=2, user=User.objects.get(id=1),
+        project2 = Project.objects.create(id=2,
             repo="project_test2",
             repo_url="https://github.com/johndoe/project_test2.git",
             private=True
         )
+        project2.user.add(self.user)
         self.project2 = project2
         project2.save()
 
-        project3 = Project.objects.create(id=3, user=User.objects.get(id=2),
+        project3 = Project.objects.create(id=3,
             repo="project_test3",
             repo_url="https://github.com/johndoe/project_test3.git",
             private=False
         )
+        project3.user.add(self.user2)
         self.project3 = project3
         project3.save()
 
-        project4 = Project.objects.create(id=4, user=User.objects.get(id=2),
+        project4 = Project.objects.create(id=4,
             repo="project_test4",
             repo_url="https://github.com/johndoe/project_test4.git",
             private=True
         )
+        project4.user.add(self.user2)
         self.project4 = project4
         project4.save()
 
-        project5 = Project.objects.create(id=5, user=User.objects.get(id=3),
+        project5 = Project.objects.create(id=5,
             repo="project_test5",
             repo_url="https://github.com/johndoe/project_test5.git",
             private=False
         )
+        project5.user.add(self.user3)
         self.project5 = project5
         project5.save()
 
-        project6 = Project.objects.create(id=6, user=User.objects.get(id=3),
+        project6 = Project.objects.create(id=6,
             repo="project_test6",
             repo_url="https://github.com/johndoe/project_test6.git",
             private=True
         )
+        project6.user.add(self.user3)
         self.project6 = project6
         project6.save()
 
@@ -129,17 +135,21 @@ class QuerysTestCase(APITestCase):
                                                  'last_execution':getattr(self.project4, "last_execution", None),
                                                  'repo_url':self.project4.repo_url,
                                                  'repo':self.project4.repo,
-                                                 'user':self.project4.user.id,
                                                  'organization':self.project4.organization,
-                                                 'private':self.project4.private
+                                                 'private':self.project4.private,
+                                                 'github_id':self.project4.github_id,
+                                                 'enabled':self.project4.enabled,
+                                                 'user':[{'email':self.user2.email,'username':self.user2.username}]
                                                 },
                                                 {'id':self.project3.id,
                                                 'last_execution':getattr(self.project3, "last_execution", None),
                                                 'repo_url':self.project3.repo_url,
                                                 'repo':self.project3.repo,
-                                                'user':self.project3.user.id,
                                                 'organization':self.project3.organization,
-                                                'private':self.project3.private
+                                                'private':self.project3.private,
+                                                'github_id':self.project3.github_id,
+                                                'enabled':self.project4.enabled,
+                                                'user':[{'email':self.user2.email,'username':self.user2.username}]
                                                 }
                                                 ])
 
@@ -152,9 +162,11 @@ class QuerysTestCase(APITestCase):
                                                 'last_execution':getattr(self.project, "last_execution", None),
                                                 'repo_url':self.project.repo_url,
                                                 'repo':self.project.repo,
-                                                'user':self.project.user.id,
                                                 'organization':self.project.organization,
-                                                'private':self.project.private}])
+                                                'private':self.project.private,
+                                                'github_id':self.project.github_id,
+                                                'enabled':self.project4.enabled,
+                                                'user':[{'email':self.user.email,'username':self.user.username}]}])
 
     def test_executions_project_query(self):
         client = APIClient()
@@ -179,7 +191,7 @@ class QuerysTestCase(APITestCase):
                                                  'exec_date':self.execution.exec_date,
                                                  'exec_number':self.execution.exec_number,
                                                  'project':self.execution.project.id,
-                                                 'actor':self.execution.actor
+                                                 'actor':self.execution.actor,
                                                 }])
 
     def test_executions_project_private(self):

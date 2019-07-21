@@ -87,11 +87,13 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = 'Users'
 
 class Project(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ManyToManyField(User)
     organization = models.CharField(max_length=256, default="NA")
     private = models.BooleanField(default=False)
     repo = models.CharField(max_length=256, default="NA")
     repo_url = models.CharField(max_length=256, default="NA")
+    enabled = models.BooleanField(default=True)
+    github_id = models.IntegerField(default=0)
 
     @property
     def latest_execution(self):
