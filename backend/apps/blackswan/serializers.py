@@ -23,8 +23,8 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         read_only = ['user']
-        fields = ['id', 'organization', 'private', 'repo', 'repo_url', 'github_id',
-                  'user', 'last_execution', 'enabled']
+        fields = ['id', 'organization', 'private', 'repo', 'repo_url',
+                  'github_id', 'user', 'last_execution', 'enabled']
 
 
 class OwnerSerializer(serializers.Serializer):

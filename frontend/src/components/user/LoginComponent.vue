@@ -37,6 +37,7 @@ export default {
         const token = response.data.key
         return this.$store.dispatch('getUser')
       }).then(() => {
+        axios.get('/auth/github/repo/sync/')
         return this.$router.push({ name:'projects', params: { user:this.$store.state.users.user.username}})
       }).catch((e) => {
         console.error(e)

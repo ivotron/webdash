@@ -1,7 +1,7 @@
 <template>
     <div class="page-container md-layout-row">
     <md-app>
-      <md-app-toolbar class="md-primary">
+      <md-app-toolbar class="md-dark">
         <md-button class="md-icon-button" @click="back">
           <md-icon>keyboard_arrow_left</md-icon>
         </md-button>
@@ -9,10 +9,6 @@
       </md-app-toolbar>
 
       <md-app-drawer :md-active.sync="menuVisible" md-persistent="mini">
-        <md-toolbar class="md-transparent" md-elevation="0">
-          Blackswan
-        </md-toolbar>
-
         <md-list class="md-toolbar-section-end">
           <md-list-item @click="goToProjects">
             <md-icon>view_list</md-icon>

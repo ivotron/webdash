@@ -6,7 +6,7 @@
         <md-input class="md-layout-item md-size-80" v-model="key" type="password" readonly></md-input>
       </md-content>
     </md-field>
-    <md-button class="md-dense md-raised md-primary md-layout-item md-size-10" @click="resetKey">Reset</md-button>
+    <md-button class="md-dense md-raised md-accent md-layout-item md-size-10" @click="resetKey">Reset</md-button>
   </div>
 </template>
 <script>
