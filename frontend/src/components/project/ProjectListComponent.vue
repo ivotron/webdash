@@ -2,9 +2,6 @@
   <md-card>
     <md-table md-height="600" v-model="searched" md-sort="name" md-sort-order="asc" md-fixed-header>
       <md-table-toolbar>
-        <div class="md-toolbar-section-start">
-          <h1 class="md-title">Projects</h1>
-        </div>
 
         <md-field md-clearable class="md-toolbar-section-end">
           <md-input placeholder="Search by name..." v-model="search" @input="searchOnTable" />

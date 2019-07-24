@@ -1,8 +1,8 @@
 @import "~vue-material/dist/theme/engine";
 
 @include md-register-theme("default", (
-  primary: #0097A7,
-  accent: #212121,
+  primary: #fff,
+  accent: #0097A7,
   theme: dark
 ));
 

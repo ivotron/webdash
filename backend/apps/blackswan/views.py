@@ -34,6 +34,22 @@ class GitHubRepo(ListAPIView):
         return repos
 
 
+class SyncProjects(ListAPIView):
+    serializer_class = ProjectSerializer
+
+    def get_queryset(self):
+        account = SocialAccount.objects.get(user=self.request.user)
+        token = SocialToken.objects.get(account=account)
+        g = Github(token.token)
+        repos = [Project.objects.all().filter(github_id=repo.id)
+                 .exclude(user__id=self.request.user.id).first()
+                 for repo in g.get_user().get_repos()]
+        repos = [repo for repo in repos if repo is not None]
+        for repo in repos:
+            repo.user.add(self.request.user)
+        return repos
+
+
 class ProjectViewSet(ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
