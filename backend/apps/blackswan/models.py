@@ -108,7 +108,7 @@ class WorkflowExecution(models.Model):
     pr = models.CharField(max_length=256, default="NA")
     ci_url = models.CharField(max_length=2048, default="NA")
     wf_str = models.TextField(default="NA")
-    wf_json = models.TextField(default="NA")
+    artisan = models.FileField(default="NA")
     log = models.TextField(default="NA")
     exec_date = models.DateField(default=timezone.now, blank=True, null=True)
     exec_number = models.IntegerField(default=0)
