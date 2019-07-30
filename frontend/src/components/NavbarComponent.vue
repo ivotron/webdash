@@ -3,7 +3,7 @@
     <md-app>
       <md-app-toolbar class="md-dark">
         <md-button class="md-icon-button" @click="back">
-          <octicon :icon="Octicons.chevronLeft" :scale="2"/>
+          <octicon :icon="Octicons.chevronLeft" :scale="1.7"/>
         </md-button>
         <span class="md-title">{{ $route.meta.title }}</span>
       </md-app-toolbar>
@@ -11,16 +11,16 @@
       <md-app-drawer :md-active.sync="menuVisible" md-persistent="mini">
         <md-list class="md-toolbar-section-end">
           <md-list-item @click="goToProjects">
-            <md-icon>view_list</md-icon>
+            <octicon :icon="Octicons.repo" :scale="1.5"/>
           </md-list-item>
           <md-list-item @click="goToSettings">
-            <md-icon>settings</md-icon>
+            <octicon :icon="Octicons.settings" :scale="1.5"/>
           </md-list-item>
           <md-list-item href="https://blackswan.readthedocs.io/en/latest/">
-            <md-icon>description</md-icon>
+            <octicon :icon="Octicons.fileCode" :scale="1.5"/>
           </md-list-item>
           <md-list-item @click="logout">
-            <md-icon>exit_to_app</md-icon>
+            <octicon :icon="Octicons.signOut" :scale="1.5"/>
           </md-list-item>
         </md-list>
       </md-app-drawer>
