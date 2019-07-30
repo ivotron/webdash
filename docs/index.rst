@@ -21,6 +21,11 @@ Welcome to Blackswan's documentation!
 
    sections/execution_components.md
 
+   :caption: Contents:
+
+
+>>>>>>> setup readthedocs
+
 Indices and tables
 ==================
 
