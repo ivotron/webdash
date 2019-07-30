@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import Octicon from 'octicons-vue'
 import NavbarComponent from '@/components/NavbarComponent.vue'
 import DocsComponent from '@/components/DocsComponent.vue'
 import ProjectListComponent from '@/components/project/ProjectListComponent.vue'
@@ -106,6 +106,7 @@ const routes = [
     component: TestLoginComponent
   }
 ]
+Vue.component('octicon', Octicon)
 Vue.use(VueRouter)
 Vue.use(MdToolbar)
 Vue.use(MdDrawer)

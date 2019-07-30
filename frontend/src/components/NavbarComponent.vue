@@ -3,7 +3,7 @@
     <md-app>
       <md-app-toolbar class="md-dark">
         <md-button class="md-icon-button" @click="back">
-          <md-icon>keyboard_arrow_left</md-icon>
+          <octicon :icon="Octicons.chevron" />
         </md-button>
         <span class="md-title">{{ $route.meta.title }}</span>
       </md-app-toolbar>
@@ -49,12 +49,14 @@
 </style>
 
 <script>
+import { Octicons } from 'octicons-vue'
 import axios from 'axios'
 import {vueAuth} from '../main'
 
 export default {
   name: 'PermanentMini',
   data: () => ({
+    Octicons,
     menuVisible: false
   }),
   methods: {

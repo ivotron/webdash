@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "octicons-vue": "^0.18.3",
     "register-service-worker": "^1.5.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
