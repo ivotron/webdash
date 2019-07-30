@@ -27,6 +27,13 @@ class QuerysTestCase(APITestCase):
         user3.save()
         self.user3 = user3
 
+        user4 = User.objects.create(id=4, email='popper4@blackswan.me',
+                            password='password',
+                            username='Nick')
+        user4.set_password('password')
+        user4.save()
+        self.user4 = user4
+
         project = Project.objects.create(id=1,
             repo="project_test",
             repo_url="https://github.com/johndoe/project_test.git",
@@ -81,12 +88,21 @@ class QuerysTestCase(APITestCase):
         self.project6 = project6
         project6.save()
 
+        project7 = Project.objects.create(id=7,
+            repo="project_test7",
+            repo_url="https://github.com/Nick/project_test7.git",
+            private=True
+        )
+        project7.user.add(self.user4)
+        self.project7 = project7
+        project7.save()
+
         execution = WorkflowExecution.objects.create(id=1, project=Project.objects.get(id=5),
             revision='76D7SF687D6SF', branch='master', state='running',
             pr='https://github.com/johndoe/project_5/pull/5',
             ci_url='https://travis-ci.org/systemslab/popper/builds/538372099?utm_source=github_status&utm_medium=notification',
             wf_str='workflow \"cli tests\" {\r\n  on = \"push\"\r\n  resolves = \"end\"\r\n}\r\naction \"lint\" {\r\n  uses = \"actions/bin/shellcheck@master\"\r\n  args = \"./ci/test/*\"\r\n}',
-            wf_json='NA', log='NA', exec_date='2019-05-22', exec_number=1
+            log='NA', exec_date='2019-05-22', exec_number=1
         )
         self.execution = execution
         execution.save()
@@ -96,10 +112,20 @@ class QuerysTestCase(APITestCase):
             pr='https://github.com/johndoe/project_6/pull/5',
             ci_url='https://travis-ci.org/systemslab/popper/builds/538372099?utm_source=github_status&utm_medium=notification',
             wf_str='workflow \"cli tests\" {\r\n  on = \"push\"\r\n  resolves = \"end\"\r\n}\r\naction \"lint\" {\r\n  uses = \"actions/bin/shellcheck@master\"\r\n  args = \"./ci/test/*\"\r\n}',
-            wf_json='NA', log='NA', exec_date='2019-05-22', exec_number=1
+            log='NA', exec_date='2019-05-22', exec_number=1
         )
         self.execution2 = execution2
         execution2.save()
+
+        execution3 = WorkflowExecution.objects.create(id=3, project=Project.objects.get(id=7),
+            revision='76D7SF687D6SF', branch='master', state='running',
+            pr='https://github.com/Nick/project_6/pull/17',
+            ci_url='https://travis-ci.org/systemslab/popper/builds/538372099?utm_source=github_status&utm_medium=notification',
+            wf_str='workflow \"cli tests\" {\r\n  on = \"push\"\r\n  resolves = \"end\"\r\n}\r\naction \"lint\" {\r\n  uses = \"actions/bin/shellcheck@master\"\r\n  args = \"./ci/test/*\"\r\n}',
+            log='NA', exec_date='2019-05-22', exec_number=1, artifact='/blackswan/assets/test_file.txt'
+        )
+        self.execution3 = execution3
+        execution3.save()
 
     def test_valid_user(self):
         client = APIClient()
@@ -186,7 +212,7 @@ class QuerysTestCase(APITestCase):
                                                  'pr':self.execution.pr,
                                                  'ci_url':self.execution.ci_url,
                                                  'wf_str':self.execution.wf_str,
-                                                 'wf_json':self.execution.wf_json,
+                                                 'artifact':self.execution.artifact,
                                                  'log':self.execution.log,
                                                  'exec_date':self.execution.exec_date,
                                                  'exec_number':self.execution.exec_number,
@@ -210,10 +236,35 @@ class QuerysTestCase(APITestCase):
                                                  'pr':self.execution2.pr,
                                                  'ci_url':self.execution2.ci_url,
                                                  'wf_str':self.execution2.wf_str,
-                                                 'wf_json':self.execution2.wf_json,
+                                                 'artifact':self.execution2.artifact,
                                                  'log':self.execution2.log,
                                                  'exec_date':self.execution2.exec_date,
                                                  'exec_number':self.execution2.exec_number,
                                                  'project':self.execution2.project.id,
                                                  'actor':self.execution2.actor
+                                                }])
+
+    def test_executions_file(self):
+        client = APIClient()
+        client.post('/auth/login/', {'email': self.user4.email,
+                                     'password': 'password'}, format='json')
+        token = Token.objects.get(user__email=self.user4.email)
+        client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+        response = client.get('/api/executions?project=project_test7')
+        response.render()
+        self.assertEqual(response.status_code, 200)
+        print(response.content)
+        self.assertJSONEqual(response.content, [{'id':self.execution3.id,
+                                                 'revision':self.execution3.revision,
+                                                 'branch':self.execution3.branch,
+                                                 'state':self.execution3.state,
+                                                 'pr':self.execution3.pr,
+                                                 'ci_url':self.execution3.ci_url,
+                                                 'wf_str':self.execution3.wf_str,
+                                                 'artifact':self.execution3.artifact,
+                                                 'log':self.execution3.log,
+                                                 'exec_date':self.execution3.exec_date,
+                                                 'exec_number':self.execution3.exec_number,
+                                                 'project':self.execution3.project.id,
+                                                 'actor':self.execution3.actor
                                                 }])
