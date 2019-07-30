@@ -16,6 +16,9 @@
           <md-list-item @click="goToSettings">
             <md-icon>settings</md-icon>
           </md-list-item>
+          <md-list-item @click="goToDocs">
+            <md-icon>description</md-icon>
+          </md-list-item>
           <md-list-item @click="logout">
             <md-icon>exit_to_app</md-icon>
           </md-list-item>
@@ -68,6 +71,9 @@ export default {
     },
     goToSettings () {
       this.$router.push({ name:'repositories' })
+    },
+    goToDocs () {
+      this.$router.push({ name:'docs' })
     }
   }
 }

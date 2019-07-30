@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import NavbarComponent from '@/components/NavbarComponent.vue'
+import DocsComponent from '@/components/DocsComponent.vue'
 import ProjectListComponent from '@/components/project/ProjectListComponent.vue'
 import ExecutionListComponent from '@/components/workflowexec/ExecutionListComponent.vue'
 import ExecutionComponent from '@/components/workflowexec/ExecutionComponent.vue'
@@ -103,6 +104,11 @@ const routes = [
     path: '/test',
     name: 'test',
     component: TestLoginComponent
+  },
+  {
+    path: '/Documentation',
+    name: 'docs',
+    component: DocsComponent
   }
 ]
 Vue.use(VueRouter)
