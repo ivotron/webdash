@@ -104,11 +104,6 @@ const routes = [
     path: '/test',
     name: 'test',
     component: TestLoginComponent
-  },
-  {
-    path: '/Documentation',
-    name: 'docs',
-    component: DocsComponent
   }
 ]
 Vue.use(VueRouter)

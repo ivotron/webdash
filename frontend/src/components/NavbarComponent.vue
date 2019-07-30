@@ -16,7 +16,7 @@
           <md-list-item @click="goToSettings">
             <md-icon>settings</md-icon>
           </md-list-item>
-          <md-list-item @click="goToDocs">
+          <md-list-item href="https://blackswan.readthedocs.io/en/latest/">
             <md-icon>description</md-icon>
           </md-list-item>
           <md-list-item @click="logout">
