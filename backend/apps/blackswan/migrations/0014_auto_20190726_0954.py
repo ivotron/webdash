@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='workflowexecution',
-            name='artisan',
+            name='artifact',
             field=models.FileField(default='NA', upload_to=''),
         ),
     ]
