@@ -3,7 +3,7 @@
     <md-app>
       <md-app-toolbar class="md-dark">
         <md-button class="md-icon-button" @click="back">
-          <octicon :icon="Octicons.chevron" />
+          <octicon :icon="Octicons.chevronLeft" :scale="2"/>
         </md-button>
         <span class="md-title">{{ $route.meta.title }}</span>
       </md-app-toolbar>
