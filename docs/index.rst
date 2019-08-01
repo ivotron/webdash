@@ -8,9 +8,18 @@ Welcome to Blackswan's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
+   sections/setup_blackswan.md
 
+.. toctree::
+   :maxdepth: 2
+
+   sections/workflow.md
+
+.. toctree::
+   :maxdepth: 2
+
+   sections/execution_components.md
 
 Indices and tables
 ==================

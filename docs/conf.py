@@ -20,7 +20,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Blackswan'
-copyright = '2019, blkswanio'
+copyright = '2019, Ivo Jimenez'
 author = 'blkswanio'
 
 # The short X.Y version
