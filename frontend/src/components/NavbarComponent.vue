@@ -31,7 +31,7 @@
           </md-list>
         </md-app-drawer>
       <md-app-content>
-        <router-view v-if="this.$store.getters.userLoaded"></router-view>
+        <router-view></router-view>
       </md-app-content>
     </md-app>
   </div>
@@ -66,8 +66,7 @@ export default {
       this.$router.go(-1)
     },
     logout(){
-      console.log('wtf')
-      vueAuth.setToken({key: null})
+      vueAuth.storage.removeItem(vueAuth.tokenName)
       return this.$router.push({ name: 'login' })
     },
     goToProjects(){
