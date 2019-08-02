@@ -168,6 +168,9 @@ epub_title = project
 # A unique identification for the text.
 #
 # epub_uid = ''
-
+source_parsers = {
+    '.md': CommonMarkParser,
+}
+source_suffix = ['.rst', '.md']
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = ['search.html']
