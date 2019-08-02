@@ -7,28 +7,32 @@
         </md-button>
         <span class="md-title">{{ $route.meta.title }}</span>
       </md-app-toolbar>
-
-      <md-app-drawer :md-active.sync="menuVisible" md-persistent="mini">
-        <md-list class="md-toolbar-section-end">
-          <md-list-item @click="goToProjects">
-            <md-icon>view_list</md-icon>
-          </md-list-item>
-          <md-list-item @click="goToSettings">
-            <md-icon>settings</md-icon>
-          </md-list-item>
-          <md-list-item href="https://blackswan.readthedocs.io/en/latest/">
-            <md-icon>description</md-icon>
-          </md-list-item>
-          <md-list-item @click="logout">
-            <md-icon>exit_to_app</md-icon>
-          </md-list-item>
-        </md-list>
-      </md-app-drawer>
-
+        <md-app-drawer :md-active.sync="menuVisible" md-persistent="mini">
+          <md-list class="md-toolbar-section-end">
+            <md-list-item href="https://blackswan.readthedocs.io/en/latest/">
+              <md-icon>description</md-icon>
+            </md-list-item>
+            <template v-if="getKey()">
+              <md-list-item @click="goToProjects">
+                <md-icon>view_list</md-icon>
+              </md-list-item>
+              <md-list-item @click="goToSettings">
+                <md-icon>settings</md-icon>
+              </md-list-item>
+              <md-list-item @click="logout">
+                <md-icon>exit_to_app</md-icon>
+              </md-list-item>
+            </template>
+            <template v-else>
+              <md-list-item @click="goLogin">
+                <md-icon>person</md-icon>
+              </md-list-item>
+            </template>
+          </md-list>
+        </md-app-drawer>
       <md-app-content>
         <router-view v-if="this.$store.getters.userLoaded"></router-view>
       </md-app-content>
-
     </md-app>
   </div>
 </template>
@@ -58,22 +62,25 @@ export default {
     menuVisible: false
   }),
   methods: {
-    back() {
+    back(){
       this.$router.go(-1)
     },
-    logout () {
+    logout(){
       console.log('wtf')
       vueAuth.setToken({key: null})
       return this.$router.push({ name: 'login' })
     },
-    goToProjects () {
+    goToProjects(){
       this.$router.push({ name:'projects', params: { user:this.$store.state.users.user.username }})
     },
-    goToSettings () {
+    goToSettings(){
       this.$router.push({ name:'repositories' })
     },
-    goToDocs () {
-      this.$router.push({ name:'docs' })
+    goLogin(){
+      this.$router.push({ name:'login' })
+    },
+    getKey(){
+      return vueAuth.getToken()
     }
   }
 }
