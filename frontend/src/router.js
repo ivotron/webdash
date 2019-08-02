@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import {vueAuth} from './main'
 
 import NavbarComponent from '@/components/NavbarComponent.vue'
 import ProjectListComponent from '@/components/project/ProjectListComponent.vue'
@@ -45,6 +46,13 @@ const routes = [
         name: 'profile',
         meta: { title: 'Profile' },
         component: ProfileComponent,
+        beforeEnter: (to, from, next) => {
+          if(vueAuth.isAuthenticated()){
+            next()
+          }else{
+            next('/login')
+          }
+        },
         children: [
           {
             path: 'repositories',

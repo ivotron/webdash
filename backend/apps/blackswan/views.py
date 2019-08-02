@@ -51,6 +51,7 @@ class SyncProjects(ListAPIView):
 
 
 class ProjectViewSet(ModelViewSet):
+    permission_classes = [IsOwnerOrPublic]
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
 

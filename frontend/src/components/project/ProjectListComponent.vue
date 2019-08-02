@@ -11,7 +11,6 @@
       <md-table-empty-state
         md-label="No Projects found"
         :md-description="`No project found with this '${search}'.`">
-        <md-button class="md-primary md-raised" @click="newProject">Add new project</md-button>
       </md-table-empty-state>
 
       <md-table-row slot="md-table-row" slot-scope="{ item }" @click.native="openExecutions(item.repo)">
@@ -63,14 +62,11 @@ import axios from 'axios'
       projects: []
     }),
     methods: {
-      newProject () {
-        window.alert('Noop')
-      },
       searchOnTable () {
         this.searched = searchByName(this.projects, this.search)
       },
       openExecutions (name) {
-        this.$router.push({ name: 'executions', params: { user:this.$store.state.users.user.email, project: name }})
+        this.$router.push({ name: 'executions', params: { user:this.$store.state.users.user.username, project: name }})
       }
     },
     created () {

@@ -12,19 +12,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-export default {
-  data: () => ({
-    projects: []
-  }),
-  created () {
-    axios.get(`/api/projects?username=${this.$route.params.user}`)
-      .then(response => {
-        this.projects = response.data
-        this.searched = this.projects
-      })
-  }
-}
+export default {}
 </script>
 
 <style>
