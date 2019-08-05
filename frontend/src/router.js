@@ -70,13 +70,13 @@ const routes = [
         ]
       },
       {
-        path: ':user/projects',
+        path: ':user',
         name: 'projects',
         meta: { title: 'Projects' },
         component: ProjectListComponent
       },
       {
-        path: ':user/:project/executions',
+        path: ':user/:project',
         name: 'executions',
         meta: { title: 'Executions' },
         component: ExecutionListComponent
