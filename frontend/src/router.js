@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import {vueAuth} from './main'
 
 import NavbarComponent from '@/components/NavbarComponent.vue'
+import FailComponent from '@/components/FailComponent.vue'
 import ProjectListComponent from '@/components/project/ProjectListComponent.vue'
 import ExecutionListComponent from '@/components/workflowexec/ExecutionListComponent.vue'
 import ExecutionComponent from '@/components/workflowexec/ExecutionComponent.vue'
@@ -69,13 +70,13 @@ const routes = [
         ]
       },
       {
-        path: ':user/projects',
+        path: ':user',
         name: 'projects',
         meta: { title: 'Projects' },
         component: ProjectListComponent
       },
       {
-        path: ':user/:project/executions',
+        path: ':user/:project',
         name: 'executions',
         meta: { title: 'Executions' },
         component: ExecutionListComponent
@@ -99,6 +100,11 @@ const routes = [
             component: WorkflowComponent
           }
         ]
+      },
+      {
+        path: '*',
+        name: '404',
+        component: FailComponent
       }
     ]
   },
