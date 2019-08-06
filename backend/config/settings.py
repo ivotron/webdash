@@ -90,18 +90,31 @@ MANAGERS = ADMINS
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env.str('POSTGRES_DB'),
-        'USER': env.str('POSTGRES_USER'),
-        'PASSWORD': env.str('POSTGRES_PASSWORD'),
-        'HOST': 'postgres',
-        'PORT': 5432,
-        'TEST': {
-            'NAME': 'test_database'
+if os.getenv('GAE_APPLICATION', None):
+    # Running on production App Engine, so connect to Google Cloud SQL using
+    # the unix socket at /cloudsql/<your-cloudsql-connection string>
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': env.str('GAE_HOST'),
+            'USER': env.str('GAE_USER'),
+            'PASSWORD': env.str('GAE_PASSWORD'),
+            'NAME': env.str('GAE_DB'),
         }
-    },
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': env.str('POSTGRES_DB'),
+            'USER': env.str('POSTGRES_USER'),
+            'PASSWORD': env.str('POSTGRES_PASSWORD'),
+            'HOST': 'postgres',
+            'PORT': 5432,
+            'TEST': {
+                'NAME': 'test_database'
+            }
+        },
 }
 
 # GENERAL CONFIGURATION
