@@ -5,7 +5,6 @@ volumes:
 
 services:
   backend:
-    network_mode: host
     build:
       context: ./backend
     depends_on:
