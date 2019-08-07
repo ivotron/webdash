@@ -17,11 +17,6 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 Vue.config.productionTip = false
 
-// Sentry for logging frontend errors
-if (process.env.NODE_ENV === 'production') {
-  Vue.use(VueRaven, { dsn: process.env.VUE_APP_SENTRY_PUBLIC_DSN })
-}
-
 // more info: https://github.com/MatteoGabriele/vue-analytics
 /*Vue.use(VueAnalytics, {
   id: process.env.VUE_APP_GOOGLE_ANALYTICS,

@@ -8,6 +8,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
 import environ
+import os
 from datetime import timedelta
 
 ROOT_DIR = environ.Path(__file__) - 2
@@ -95,11 +96,11 @@ if os.getenv('GAE_APPLICATION', None):
     # the unix socket at /cloudsql/<your-cloudsql-connection string>
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'HOST': env.str('GAE_HOST'),
-            'USER': env.str('GAE_USER'),
-            'PASSWORD': env.str('GAE_PASSWORD'),
-            'NAME': env.str('GAE_DB'),
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'HOST': env.str('GCLOUD_HOST'),
+            'USER': env.str('GCLOUD_USER'),
+            'PASSWORD': env.str('GCLOUD_PASSWORD'),
+            'NAME': env.str('GCLOUD_DB'),
         }
     }
 else:
@@ -115,7 +116,7 @@ else:
                 'NAME': 'test_database'
             }
         },
-}
+    }
 
 # GENERAL CONFIGURATION
 # ------------------------------------------------------------------------------

@@ -76,3 +76,6 @@ media/
 
 # Venv
 venv
+
+backend/env_variables.yaml
+.env
