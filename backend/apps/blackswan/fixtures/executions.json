@@ -3,7 +3,7 @@
     "model": "blackswan.workflowexecution",
     "pk": 1,
     "fields": {
-      "project": 1,
+      "project": 57,
       "revision": "76D7SF687D6SF",
       "branch": "master",
       "state": "running",
@@ -19,7 +19,7 @@
     "model": "blackswan.workflowexecution",
     "pk": 2,
     "fields": {
-      "project": 2,
+      "project": 58,
       "revision": "DASDS67DF9",
       "branch": "V10",
       "pr": "https://github.com/johndoe/project_1/pull/56",
@@ -33,7 +33,7 @@
       "model": "blackswan.workflowexecution",
       "pk": 3,
       "fields": {
-        "project": 2,
+        "project": 59,
         "revision": "HD3D6A7SDFG42D",
         "branch": "V2.0",
         "pr": "https://github.com/johndoe/project_1/pull/25",
@@ -47,7 +47,7 @@
       "model": "blackswan.workflowexecution",
       "pk": 4,
       "fields": {
-        "project": 2,
+        "project": 60,
         "revision": "HD5365DS6DAS",
         "branch": "V2.0.1",
         "pr": "https://github.com/johndoe/project_1/pull/56",

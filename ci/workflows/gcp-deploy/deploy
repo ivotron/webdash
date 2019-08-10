@@ -7,20 +7,18 @@ action "GCP Authenticate" {
   secrets = ["GCLOUD_AUTH"]
 }
 
-action "npm Install" {
-  needs = "GCP Authenticate"
-  uses = "actions/npm@master"
-  args = "install"
+action "clean node dependencies" {
+  runs = ["rm", "-rf", "frontend/node_modules/"]
 }
 
 action "Run Build" {
-  needs = "npm Install"
+  needs = "clean node dependencies"
   uses = "actions/npm@master"
-  args = ["run", "build"]
+  runs = ["sh", "-c", "cd frontend && npm install && npm build"]
 }
 
 action "GCP Deploy" {
   needs = "Run Build"
   uses = "actions/gcloud/cli@master"
-  args = ["app", "deploy"]
+  runs = ["sh", "-c", "cd backend && gcloud app deploy"]
 }

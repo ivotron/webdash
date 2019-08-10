@@ -1,9 +1,6 @@
 # [START django_app]
 runtime: python37
 
-includes:
-  - env_variables.yaml
-
 handlers:
 # This configures Google App Engine to serve the files in the app's static
 # directory.
@@ -13,6 +10,8 @@ handlers:
 # This handler routes all requests not caught above to your main app. It is
 # required when static routes are defined, but can be omitted (along with
 # the entire handlers section) when there are no static files defined.
+
+# When you change backend/config/
 - url: /api/.*
   script: auto
 

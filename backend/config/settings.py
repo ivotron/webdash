@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 import environ
 import os
+from config.settings_gcp import get_setting
 from datetime import timedelta
 
 ROOT_DIR = environ.Path(__file__) - 2
@@ -64,14 +65,24 @@ MIDDLEWARE = [
 # DEBUG
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = env.bool('DEBUG')
-SECRET_KEY = env.str('SECRET_KEY')
+if os.getenv('GAE_APPLICATION', None):
+    DEBUG = bool(get_setting('DEBUG'))
+    SECRET_KEY = get_setting('SECRET_KEY')
 
-#Github callback_url
-CALLBACK_URL = env.str('CALLBACK_URL')
-# DOMAINS
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
-DOMAIN = env.str('DOMAIN')
+    #Github callback_url
+    CALLBACK_URL = get_setting('CALLBACK_URL')
+    # DOMAINS
+    ALLOWED_HOSTS = [get_setting('ALLOWED_HOSTS')]
+    DOMAIN = get_setting('DOMAIN')
+else:
+    DEBUG = env.bool('DEBUG')
+    SECRET_KEY = env.str('SECRET_KEY')
+
+    #Github callback_url
+    CALLBACK_URL = env.str('CALLBACK_URL')
+    # DOMAINS
+    ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
+    DOMAIN = env.str('DOMAIN')
 
 # EMAIL CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -97,10 +108,10 @@ if os.getenv('GAE_APPLICATION', None):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'HOST': env.str('GCLOUD_HOST'),
-            'USER': env.str('GCLOUD_USER'),
-            'PASSWORD': env.str('GCLOUD_PASSWORD'),
-            'NAME': env.str('GCLOUD_DB'),
+            'HOST': get_setting('GCLOUD_HOST'),
+            'USER': get_setting('GCLOUD_USER'),
+            'PASSWORD': get_setting('GCLOUD_PASSWORD'),
+            'NAME': get_setting('GCLOUD_DB'),
         }
     }
 else:
