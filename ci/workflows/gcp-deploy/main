@@ -7,16 +7,10 @@ action "GCP Authenticate" {
   secrets = ["GCLOUD_AUTH"]
 }
 
-action "clean node dependencies" {
-  needs = "GCP Authenticate"
-  uses = "docker://docker/compose:1.24.0"
-  runs = ["rm", "-rf", "frontend/node_modules/"]
-}
-
 action "Run Build" {
-  needs = "clean node dependencies"
+  needs = "GCP Authenticate"
   uses = "actions/npm@master"
-  runs = ["sh", "-c", "cd frontend && npm install && npm build"]
+  runs = ["sh", "-c", "cd frontend && rm -rf node_modules/ && npm install && npm build"]
 }
 
 action "GCP Deploy" {
