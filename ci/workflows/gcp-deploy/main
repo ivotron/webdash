@@ -1,0 +1,20 @@
+workflow "Run GCP" {
+  resolves = "GCP Deploy"
+}
+
+action "GCP Authenticate" {
+  uses = "actions/gcloud/auth@master"
+  secrets = ["GCLOUD_AUTH"]
+}
+
+action "Run Build" {
+  needs = "GCP Authenticate"
+  uses = "actions/npm@master"
+  runs = ["sh", "-c", "cd frontend && rm -rf node_modules/ && npm install && npm build"]
+}
+
+action "GCP Deploy" {
+  needs = "Run Build"
+  uses = "actions/gcloud/cli@master"
+  runs = ["sh", "-c", "cd backend && gcloud app deploy"]
+}

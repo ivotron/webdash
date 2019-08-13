@@ -1,0 +1,29 @@
+# [START django_app]
+runtime: python37
+handlers:
+# This configures Google App Engine to serve the files in the app's static
+# directory.
+- url: /staticfiles
+  static_dir: staticfiles/
+
+# This handler routes all requests not caught above to your main app. It is
+# required when static routes are defined, but can be omitted (along with
+# the entire handlers section) when there are no static files defined.
+
+# When you change backend/config/
+- url: /api/.*
+  script: auto
+
+- url: /auth/.*
+  script: auto
+
+- url: /admin/.*
+  script: auto
+
+- url: /(.*\.(js|css))$
+  static_files: frontend/\1
+  upload: frontend/.*\.(js|css)$
+
+- url: /(.+)
+  static_files: frontend/index.html
+  upload: frontend/index.html

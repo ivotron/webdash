@@ -1,6 +1,7 @@
 // vue.config.js
 module.exports = {
   lintOnSave: false,
+  outputDir: '../backend/frontend',
   devServer: {
     hot: true,
     hotOnly: true,

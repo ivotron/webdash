@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import {vueAuth} from './main'
-
+import axios from 'axios'
+import HomeComponent from '@/components/HomeComponent.vue'
 import NavbarComponent from '@/components/NavbarComponent.vue'
 import FailComponent from '@/components/FailComponent.vue'
 import ProjectListComponent from '@/components/project/ProjectListComponent.vue'
@@ -38,6 +39,16 @@ import './default-theme.scss'
 
 
 const routes = [
+  {
+    path: '/',
+    name: 'home',
+    component: HomeComponent
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginComponent
+  },
   {
     path: '/',
     component: NavbarComponent,
@@ -108,11 +119,7 @@ const routes = [
       }
     ]
   },
-  {
-    path: '/login',
-    name: 'login',
-    component: LoginComponent
-  },
+
   {
     path: '/test',
     name: 'test',

@@ -253,7 +253,6 @@ class QuerysTestCase(APITestCase):
         response = client.get('/api/executions?project=project_test7')
         response.render()
         self.assertEqual(response.status_code, 200)
-        print(response.content)
         self.assertJSONEqual(response.content, [{'id':self.execution3.id,
                                                  'revision':self.execution3.revision,
                                                  'branch':self.execution3.branch,

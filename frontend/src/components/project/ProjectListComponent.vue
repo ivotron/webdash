@@ -20,7 +20,7 @@
           <md-table-cell md-label="Last commit" md-sort-by="title">{{ item.last_execution.revision }}</md-table-cell>
           <md-table-cell md-label="Commit date" md-sort-by="title">{{ item.last_execution.exec_date }}</md-table-cell>
           <md-table-cell md-label="State" md-sort-by="state">
-            <template v-if="item.state === 'running'">
+            <template v-if="item.last_execution.state === 'running'">
               <md-icon>check</md-icon>
             </template>
             <template v-else>

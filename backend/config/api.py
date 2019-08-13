@@ -1,6 +1,6 @@
 from rest_framework import routers
-from apps.blackswan.views import ProjectViewSet
-from apps.blackswan.views import WorkflowExecutionViewSet
+from apps.blackswan.views import ProjectViewSet, \
+                                 WorkflowExecutionViewSet
 
 # Settings
 api = routers.DefaultRouter()
