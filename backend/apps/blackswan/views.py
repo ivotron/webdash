@@ -11,7 +11,7 @@ from django.conf import settings
 from apps.blackswan.serializers import WorkflowExecutionSerializer, \
                                        ProjectSerializer, \
                                        GithubRepoSerializer
-from apps.blackswan.models import WorkflowExecution, Project
+from apps.blackswan.models import WorkflowExecution, Project, User
 from apps.blackswan.permissions import IsOwnerOrPublic
 from github import Github
 

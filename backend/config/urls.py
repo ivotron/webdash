@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth import logout
 from django.conf.urls import include, url
 from config.api import api
-from apps.blackswan.views import GitHubLogin, GitHubRepo, SyncProjects
+from apps.blackswan.views import GitHubLogin, GitHubRepo, SyncProjects, UserViewSet
 from rest_framework.authtoken import views
 
 urlpatterns = [

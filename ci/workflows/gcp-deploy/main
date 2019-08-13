@@ -8,6 +8,8 @@ action "GCP Authenticate" {
 }
 
 action "clean node dependencies" {
+  needs = "GCP Authenticate"
+  uses = "docker://docker/compose:1.24.0"
   runs = ["rm", "-rf", "frontend/node_modules/"]
 }
 
