@@ -105,7 +105,7 @@ const routes = [
             component: LogComponent
           },
           {
-            path: 'workflow',
+            path: ':user/:project/:execution/workflow',
             name: 'workflow',
             meta: { title: 'Workflow' },
             component: WorkflowComponent
@@ -119,7 +119,6 @@ const routes = [
       }
     ]
   },
-
   {
     path: '/test',
     name: 'test',
