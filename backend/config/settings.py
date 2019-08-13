@@ -14,8 +14,8 @@ if os.getenv('GAE_APPLICATION', None):
     from google.cloud import datastore
 
     client = datastore.Client()
-    # The datastore extracted here was previously defined manually in 
-    # the Google Cloud Platform web console
+    # The settings were previously stored manually in
+    # the Google Cloud Platform datastore
     def get_setting(name):
         query = client.query(kind="Settings", filters=[["name", "=", name]])
         entitys = list(query.fetch())
