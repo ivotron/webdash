@@ -47,7 +47,10 @@ const actions = {
   },
   getUser (context) {
     return axios.get('/auth/user/')
-      .then(response => { context.commit('setUser', response.data) })
+      .then(response => {
+        context.commit('setUser', response.data)
+        this.$material.theming.theme = this.$store.state.users.user.theme
+      })
       .catch(e => { console.log(e) })
   },
   login (context, payload) {

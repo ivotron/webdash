@@ -148,7 +148,5 @@ const router = new VueRouter({
   routes
 })
 
-Vue.material.theming.theme = 'light-theme'
-
 console.log(Vue.material.theming.theme)
 export default router

@@ -16,10 +16,11 @@
 </template>
 <script>
 import {vueAuth} from '../../main'
+import axios from 'axios'
   export default {
     data(){
       return {
-        theme: '',
+        theme: this.$store.state.users.user.theme,
         key: this.getKey()
       }
     },
@@ -32,9 +33,12 @@ import {vueAuth} from '../../main'
       },
       getKey() {
         return vueAuth.getToken()
-      },
-      setTheme() {
+      }
+    },
+    watch: {
+      theme(newTheme, oldTheme) {
         axios.patch(`api/users/${this.$store.state.users.user.id}`, {theme:this.theme})
+        this.$material.theming.theme = this.$store.state.users.user.theme
       }
     }
   }

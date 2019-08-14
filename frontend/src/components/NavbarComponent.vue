@@ -1,7 +1,7 @@
 <template>
     <div class="page-container md-layout-row">
     <md-app>
-      <md-app-toolbar>
+      <md-app-toolbar class="md-primary">
         <md-button class="md-icon-button" @click="back">
           <md-icon>keyboard_arrow_left</md-icon>
         </md-button>

@@ -17,7 +17,7 @@
         </md-ripple>
       </md-card>
 
-      <md-tabs md-sync-route>
+      <md-tabs md-sync-route class="md-transparent md-accent">
         <md-tab id="tab-log" md-label="Logs" :to="{name:'log',params:{user:this.$store.state.users.user.username,project: this.$route.params.project,execution: this.$route.params.execution}}" exact></md-tab>
         <md-tab id="tab-graph" md-label="Workflow" :to="{name:'workflow',params:{user:this.$store.state.users.user.username,project: this.$route.params.project,execution: this.$route.params.execution}}"></md-tab>
       </md-tabs>
