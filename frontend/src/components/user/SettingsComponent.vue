@@ -7,13 +7,21 @@
       </md-content>
     </md-field>
     <md-button class="md-dense md-raised md-accent md-layout-item md-size-10" @click="resetKey">Reset</md-button>
+    <div class="md-layout-item md-size-100">
+      <h2>Themes</h2>
+      <md-radio v-model="theme" value="dark-theme">Dark</md-radio>
+      <md-radio v-model="theme" value="light-theme">Light</md-radio>
+    </div>
   </div>
 </template>
 <script>
 import {vueAuth} from '../../main'
   export default {
     data(){
-      return {key: this.getKey()}
+      return {
+        theme: '',
+        key: this.getKey()
+      }
     },
     methods: {
       resetKey() {
@@ -24,6 +32,9 @@ import {vueAuth} from '../../main'
       },
       getKey() {
         return vueAuth.getToken()
+      },
+      setTheme() {
+        axios.patch(`api/users/${this.$store.state.users.user.id}`, {theme:this.theme})
       }
     }
   }

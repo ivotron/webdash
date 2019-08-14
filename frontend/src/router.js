@@ -32,11 +32,11 @@ import {
         MdTable,
         MdTabs,
         MdSwitch,
-        MdDivider
+        MdDivider,
+        MdRadio
        } from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
 import './default-theme.scss'
-
 
 const routes = [
   {
@@ -141,10 +141,14 @@ Vue.use(MdEmptyState)
 Vue.use(MdTabs)
 Vue.use(MdSwitch)
 Vue.use(MdDivider)
+Vue.use(MdRadio)
 const router = new VueRouter({
   scrollBehavior (to, from, savedPosition) { return { x: 0, y: 0 } },
   mode: 'history',
   routes
 })
 
+Vue.material.theming.theme = 'light-theme'
+
+console.log(Vue.material.theming.theme)
 export default router
