@@ -10,10 +10,25 @@ from allauth.socialaccount.models import SocialToken, SocialAccount
 from django.conf import settings
 from apps.blackswan.serializers import WorkflowExecutionSerializer, \
                                        ProjectSerializer, \
-                                       GithubRepoSerializer
+                                       GithubRepoSerializer, \
+                                       UserSerializer
 from apps.blackswan.models import WorkflowExecution, Project, User
 from apps.blackswan.permissions import IsOwnerOrPublic
 from github import Github
+
+
+class UserViewSet(ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        queryset = User.objects.all()
+        username = self.request.query_params.get('username', None)
+        if username is not None:
+            queryset = queryset.filter(username=username).order_by('-id')
+        else:
+            queryset = queryset.filter(username=self.request.user.username).order_by('-id')
+        return queryset
 
 
 class GitHubLogin(SocialLoginView):
