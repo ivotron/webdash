@@ -37,8 +37,7 @@ import axios from 'axios'
     },
     watch: {
       theme(newTheme, oldTheme) {
-        axios.patch(`api/users/${this.$store.state.users.user.id}`, {theme:this.theme})
-        this.$material.theming.theme = this.$store.state.users.user.theme
+        this.$store.dispatch('SET_THEME', this.theme)
       }
     }
   }
