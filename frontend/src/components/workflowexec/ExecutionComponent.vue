@@ -45,7 +45,11 @@ export default {
         if(response.data.length){
           axios.get(`/api/executions/${this.$route.params.execution}`)
             .then(response => {
-              this.execution = response.data
+              if(response.data.length){
+                this.execution = response.data
+              }else{
+                this.$router.push({ name:'404' })
+              }
             })
         }else{
           this.$router.push({ name:'404' })
