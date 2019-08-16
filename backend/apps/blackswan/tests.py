@@ -165,7 +165,10 @@ class QuerysTestCase(APITestCase):
                                                  'private':self.project4.private,
                                                  'github_id':self.project4.github_id,
                                                  'enabled':self.project4.enabled,
-                                                 'user':[{'email':self.user2.email,'username':self.user2.username}]
+                                                 'user':[{'email':self.user2.email,
+                                                          'username':self.user2.username,
+                                                          'id':self.user2.id,
+                                                          'theme':self.user2.theme}]
                                                 },
                                                 {'id':self.project3.id,
                                                 'last_execution':getattr(self.project3, "last_execution", None),
