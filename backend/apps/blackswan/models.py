@@ -87,7 +87,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = 'Users'
 
 class Project(models.Model):
-    user = models.ManyToManyField(User)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    users = models.ManyToManyField(User)
     organization = models.CharField(max_length=256, default="NA")
     private = models.BooleanField(default=False)
     repo = models.CharField(max_length=256, default="NA")

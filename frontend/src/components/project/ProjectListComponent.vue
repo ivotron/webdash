@@ -3,8 +3,8 @@
     <div v-if="projects">
       <md-card>
         <md-table md-height="600" v-model="searched" md-sort="name" md-sort-order="asc" md-fixed-header>
-          <md-table-toolbar>
 
+          <md-table-toolbar>
             <md-field md-clearable class="md-toolbar-section-end">
               <md-input placeholder="Search by name..." v-model="search" @input="searchOnTable" />
             </md-field>
@@ -12,7 +12,7 @@
 
           <md-table-empty-state
             md-label="No Projects found"
-            :md-description="`No project found with this '${search}'.`">
+            :md-description="`No project found.`">
           </md-table-empty-state>
 
           <md-table-row slot="md-table-row" slot-scope="{ item }" @click.native="openExecutions(item.repo)">
@@ -40,13 +40,13 @@
         </md-table>
       </md-card>
     </div>
-      <div v-else>
-        <md-empty-state
-          md-rounded
-          md-icon="access_time"
-          md-label="Loading projects">
-        </md-empty-state>
-      </div>
+    <div v-else>
+      <md-empty-state
+        md-rounded
+        md-icon="access_time"
+        md-label="Loading projects">
+      </md-empty-state>
+    </div>
   </div>
 </template>
 
@@ -66,7 +66,6 @@ import axios from 'axios'
   }
 
   export default {
-    name: 'TableSearch',
     data: () => ({
       search: null,
       searched: [],
@@ -83,7 +82,7 @@ import axios from 'axios'
     created () {
       axios.get(`/api/users?username=${this.$route.params.user}`)
         .then(response => {
-          if(response.data.length){
+          if(response.status == 200){
             axios.get(`/api/projects?username=${this.$route.params.user}`)
               .then(response => {
                 this.projects = response.data

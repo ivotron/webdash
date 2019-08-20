@@ -67,7 +67,6 @@ class SyncProjects(ListAPIView):
 
 
 class ProjectViewSet(ModelViewSet):
-    permission_classes = [IsOwnerOrPublic]
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
 
@@ -78,7 +77,9 @@ class ProjectViewSet(ModelViewSet):
         queryset = Project.objects.all()
         user = self.request.query_params.get('username', None)
         if user is not None:
-            queryset = queryset.filter(user__username=user).order_by('-id')
+                queryset = queryset.filter(user=self.request.user.id).order_by('-id')
+            else:
+                queryset = queryset.filter(user__username=user).filter(private=False).order_by('-id')
         return queryset
 
     def perform_create(self, serializer):

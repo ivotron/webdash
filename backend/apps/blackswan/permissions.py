@@ -7,7 +7,4 @@ class IsOwnerOrPublic(permissions.BasePermission):
     """
 
     def has_object_permission(self, request, view, obj):
-        if request.method in permissions.SAFE_METHODS:
-            return True
-
-        return not obj.private or obj.owner == request.user
+        return not obj.private or request.user in obj.user_set.all()
