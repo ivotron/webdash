@@ -17,7 +17,7 @@
         </md-ripple>
       </md-card>
 
-      <md-tabs md-sync-route>
+      <md-tabs md-sync-route class="md-transparent md-accent">
         <md-tab id="tab-log" md-label="Logs" :to="{name:'log',params:{user:this.$store.state.users.user.username,project: this.$route.params.project,execution: this.$route.params.execution}}" exact></md-tab>
         <md-tab id="tab-graph" md-label="Workflow" :to="{name:'workflow',params:{user:this.$store.state.users.user.username,project: this.$route.params.project,execution: this.$route.params.execution}}"></md-tab>
       </md-tabs>
@@ -45,7 +45,11 @@ export default {
         if(response.data.length){
           axios.get(`/api/executions/${this.$route.params.execution}`)
             .then(response => {
-              this.execution = response.data
+              if(response.data.length){
+                this.execution = response.data
+              }else{
+                this.$router.push({ name:'404' })
+              }
             })
         }else{
           this.$router.push({ name:'404' })

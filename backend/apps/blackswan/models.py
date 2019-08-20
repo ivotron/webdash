@@ -69,6 +69,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         editable=False,
         default="_"
     )
+    theme = models.CharField(
+        verbose_name='Theme',
+        max_length=30,
+        default="light-theme"
+    )
     is_admin = models.BooleanField(verbose_name='Admin', default=False)
     is_active = models.BooleanField(verbose_name='Active', default=True)
     is_staff = models.BooleanField(verbose_name='Staff', default=False)

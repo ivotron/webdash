@@ -5,8 +5,8 @@ from apps.blackswan.models import User, WorkflowExecution, Project
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('email', 'username')
-        read_only_fields = ('email', 'username')
+        fields = ('id', 'email', 'username', 'theme')
+        read_only_fields = ('id', 'email', 'username')
 
 
 class WorkflowExecutionSerializer(serializers.ModelSerializer):

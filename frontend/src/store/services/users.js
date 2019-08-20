@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {vueAuth} from '../../main'
+import Vue from 'vue'
 
 const state = {
   users: [],
@@ -31,6 +32,9 @@ const mutations = {
   },
   setToken (state, token) {
     state.token = token
+  },
+  setTheme (state, theme) {
+    state.user.theme = theme
   }
 }
 
@@ -47,7 +51,10 @@ const actions = {
   },
   getUser (context) {
     return axios.get('/auth/user/')
-      .then(response => { context.commit('setUser', response.data) })
+      .then(response => {
+        context.commit('setUser', response.data)
+        Vue.material.theming.theme = state.user.theme
+      })
       .catch(e => { console.log(e) })
   },
   login (context, payload) {
@@ -114,6 +121,11 @@ const actions = {
     return axios.post('/api/users/password_change/', payload)
       .then(response => { context.commit('setTokenFail', false) })
       .catch(e => { context.commit('setTokenFail', true) })
+  },
+  SET_THEME: ({commit}, payload) => {
+    axios.patch(`/api/users/${state.user.id}`, {theme:payload})
+    commit('setTheme', payload)
+    Vue.material.theming.theme = state.user.theme
   }
 }
 

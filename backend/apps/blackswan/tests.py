@@ -165,7 +165,10 @@ class QuerysTestCase(APITestCase):
                                                  'private':self.project4.private,
                                                  'github_id':self.project4.github_id,
                                                  'enabled':self.project4.enabled,
-                                                 'user':[{'email':self.user2.email,'username':self.user2.username}]
+                                                 'user':[{'email':self.user2.email,
+                                                          'username':self.user2.username,
+                                                          'id':self.user2.id,
+                                                          'theme':self.user2.theme}]
                                                 },
                                                 {'id':self.project3.id,
                                                 'last_execution':getattr(self.project3, "last_execution", None),
@@ -175,7 +178,10 @@ class QuerysTestCase(APITestCase):
                                                 'private':self.project3.private,
                                                 'github_id':self.project3.github_id,
                                                 'enabled':self.project4.enabled,
-                                                'user':[{'email':self.user2.email,'username':self.user2.username}]
+                                                'user':[{'id':self.user2.id,
+                                                         'email':self.user2.email,
+                                                         'username':self.user2.username,
+                                                         'theme':self.user2.theme}]
                                                 }
                                                 ])
 
@@ -192,7 +198,10 @@ class QuerysTestCase(APITestCase):
                                                 'private':self.project.private,
                                                 'github_id':self.project.github_id,
                                                 'enabled':self.project4.enabled,
-                                                'user':[{'email':self.user.email,'username':self.user.username}]}])
+                                                'user':[{'id':self.user.id,
+                                                         'email':self.user.email,
+                                                         'username':self.user.username,
+                                                         'theme':self.user.theme}]}])
 
     def test_executions_project_query(self):
         client = APIClient()
