@@ -81,7 +81,7 @@ const routes = [
         component: ProjectListComponent
       },
       {
-        path: ':user/:project',
+        path: ':org/:project',
         name: 'executions',
         meta: { title: 'Executions' },
         component: ExecutionListComponent
@@ -93,13 +93,13 @@ const routes = [
         component: ExecutionComponent,
         children: [
           {
-            path: ':user/:project/:execution/log',
+            path: ':org/:project/:execution/log',
             name: 'log',
             meta: { title: 'Log' },
             component: LogComponent
           },
           {
-            path: ':user/:project/:execution/workflow',
+            path: ':org/:project/:execution/workflow',
             name: 'workflow',
             meta: { title: 'Workflow' },
             component: WorkflowComponent

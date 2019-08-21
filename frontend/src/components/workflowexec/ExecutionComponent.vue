@@ -8,7 +8,7 @@
             <div class="md-subhead" v-if="execution"># {{ execution.exec_number }}</div>
           </md-card-header>
           <md-card-content v-if="execution">
-            <p>User: {{ this.$route.params.user }}</p>
+            <p>User: {{ this.$route.params.org }}</p>
             <p>Branch: {{ execution.branch }}</p>
             <p>Revision: {{ execution.revision }}</p>
             <p>Pull request: {{ execution.pr }}</p>
@@ -18,8 +18,8 @@
       </md-card>
 
       <md-tabs md-sync-route class="md-transparent md-accent">
-        <md-tab id="tab-log" md-label="Logs" :to="{name:'log',params:{user:this.$store.state.users.user.username,project: this.$route.params.project,execution: this.$route.params.execution}}" exact></md-tab>
-        <md-tab id="tab-graph" md-label="Workflow" :to="{name:'workflow',params:{user:this.$store.state.users.user.username,project: this.$route.params.project,execution: this.$route.params.execution}}"></md-tab>
+        <md-tab id="tab-log" md-label="Logs" :to="{name:'log',params:{org:this.$route.params.org, project:this.$route.params.project, execution:this.$route.params.execution}}" exact></md-tab>
+        <md-tab id="tab-graph" md-label="Workflow" :to="{name:'workflow',params:{org:this.$route.params.org, project:this.$route.params.project, execution:this.$route.params.execution}}"></md-tab>
       </md-tabs>
       <router-view v-bind:execution="execution"></router-view>
     </div>
@@ -40,7 +40,7 @@ export default {
     execution: null
   }),
   created () {
-    axios.get(`/api/users?username=${this.$route.params.user}`)
+    axios.get(`/api/users?username=${this.$route.params.org}`)
       .then(response => {
         if(response.data.length){
           axios.get(`/api/executions/${this.$route.params.execution}`)

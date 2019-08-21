@@ -71,7 +71,7 @@ class ProjectViewSet(ModelViewSet):
     serializer_class = ProjectSerializer
 
     def get_serializer_context(self):
-        return {'request':self.request}
+        return { 'request':self.request }
 
     def get_queryset(self):
         queryset = Project.objects.all()
