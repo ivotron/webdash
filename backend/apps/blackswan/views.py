@@ -8,6 +8,7 @@ from allauth.socialaccount.providers.github.views import GitHubOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from allauth.socialaccount.models import SocialToken, SocialAccount
 from django.conf import settings
+from django_filters.rest_framework import DjangoFilterBackend
 from apps.blackswan.serializers import WorkflowExecutionSerializer, \
                                        ProjectSerializer, \
                                        GithubRepoSerializer, \
@@ -66,9 +67,9 @@ class SyncProjects(ListAPIView):
 
 
 class ProjectViewSet(ModelViewSet):
-    permission_classes = [IsOwnerOrPublic]
-    queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['organization', 'repo']
 
     def get_serializer_context(self):
         return { 'request':self.request }
@@ -77,10 +78,10 @@ class ProjectViewSet(ModelViewSet):
         queryset = Project.objects.all()
         user = self.request.query_params.get('username', None)
         if user is not None:
-            queryset = queryset.filter(user__username=user).filter(private=False).order_by('-id')
-        else:
-            queryset = queryset.filter(user=self.request.user.id).order_by('-id')
-        return queryset
+            if self.request.user:
+                if queryset.filter(user__username=self.request.user.username).order_by('-id'):
+                    return queryset.filter(user__username=user).order_by('-id')
+            return queryset.filter(user__username=user).filter(private=False).order_by('-id')
 
     def perform_create(self, serializer):
         serializer.save(user=[self.request.user])
