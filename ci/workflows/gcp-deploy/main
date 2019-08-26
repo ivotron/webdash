@@ -13,6 +13,16 @@ action "Run Build" {
   runs = ["sh", "-c", "cd frontend && rm -rf node_modules/ && npm install && npm build"]
 }
 
+action "Migrate" {
+  uses = "ci/actions/gcloud_proxy"
+  args = ""
+  env = {
+    GCLOUD_MIGRATION_MODE = "1"
+  }
+  secrets = [ POSTGRES_..., 
+  ]
+}
+
 action "GCP Deploy" {
   needs = "Run Build"
   uses = "actions/gcloud/cli@master"

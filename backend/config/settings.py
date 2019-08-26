@@ -125,6 +125,8 @@ if os.getenv('GAE_APPLICATION', None):
             'NAME': get_setting('GCLOUD_DB'),
         }
     }
+if os.getenv('GCLOUD_MIGRATION_MODE', None):
+   os.env['POSTGRES_DB']
 else:
     DATABASES = {
         'default': {
