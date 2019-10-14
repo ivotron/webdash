@@ -9,17 +9,17 @@
       </md-app-toolbar>
         <md-app-drawer :md-active.sync="menuVisible" md-persistent="mini">
           <md-list class="md-toolbar-section-end">
-            <md-list-item href="https://blackswan.readthedocs.io/en/latest/">
+            <md-list-item title="Read the Docs" href="https://blackswan.readthedocs.io/en/latest/" target="_blank">
               <md-icon>description</md-icon>
             </md-list-item>
             <template v-if="getKey()">
-              <md-list-item @click="goToProjects">
+              <md-list-item title="Projects" @click="goToProjects">
                 <md-icon>view_list</md-icon>
               </md-list-item>
-              <md-list-item @click="goToSettings">
+              <md-list-item title="Settings" @click="goToSettings">
                 <md-icon>settings</md-icon>
               </md-list-item>
-              <md-list-item @click="logout">
+              <md-list-item title="Logout" @click="logout">
                 <md-icon>exit_to_app</md-icon>
               </md-list-item>
             </template>
