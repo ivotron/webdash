@@ -5,7 +5,7 @@
         <md-ripple>
           <md-card-header>
             <div class="md-title">{{ this.$route.params.project }}</div>
-            <div class="md-subhead">By: {{ this.$store.state.users.user.username }}</div>
+            <div class="md-subhead">By: {{ this.$route.params.org }}</div>
           </md-card-header>
 
           <md-card-content md-med>
@@ -75,7 +75,7 @@ export default {
     }
   },
   created () {
-    axios.get(`/api/users?username=${this.$route.params.user}`)
+    axios.get(`/api/users?username=${this.$route.params.org}`)
       .then(response => {
         if(response.data.length){
           axios.get(`/api/executions?project=${this.$route.params.project}`)

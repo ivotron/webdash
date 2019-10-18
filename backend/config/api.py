@@ -9,5 +9,5 @@ api.trailing_slash = '/?'
 
 # APIs
 api.register(r'users', UserViewSet)
-api.register(r'projects', ProjectViewSet)
+api.register(r'projects', ProjectViewSet, basename='Project')
 api.register(r'executions', WorkflowExecutionViewSet)

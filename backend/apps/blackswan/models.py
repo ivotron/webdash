@@ -92,7 +92,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = 'Users'
 
 class Project(models.Model):
-    user = models.ManyToManyField(User)
+    user = models.ManyToManyField(User, related_name='project_users')
     organization = models.CharField(max_length=256, default="NA")
     private = models.BooleanField(default=False)
     repo = models.CharField(max_length=256, default="NA")

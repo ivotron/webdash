@@ -37,6 +37,7 @@ DJANGO_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'django_filters',
 ]
 
 THIRD_PARTY_APPS = [
@@ -264,6 +265,8 @@ ACCOUNT_USERNAME_REQUIRED = False
 # ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
     'UPLOADED_FILES_USE_URL': False,
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.BasicAuthentication'

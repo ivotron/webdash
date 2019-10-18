@@ -15,7 +15,7 @@
             :md-description="`No project found with this '${search}'.`">
           </md-table-empty-state>
 
-          <md-table-row slot="md-table-row" slot-scope="{ item }" @click.native="openExecutions(item.repo)">
+          <md-table-row slot="md-table-row" slot-scope="{ item }" @click.native="openExecutions(item)">
             <md-table-cell md-label="Name" md-sort-by="name">{{ item.repo }}</md-table-cell>
             <template v-if='item.last_execution'>
               <md-table-cell md-label="#" md-sort-by="title">{{ item.last_execution.exec_number }}</md-table-cell>
@@ -76,8 +76,8 @@ import axios from 'axios'
       searchOnTable () {
         this.searched = searchByName(this.projects, this.search)
       },
-      openExecutions (name) {
-        this.$router.push({ name: 'executions', params: { user:this.$store.state.users.user.username, project: name }})
+      openExecutions (repo) {
+        this.$router.push({ name: 'executions', params: { org:repo.organization, project: repo.repo }})
       }
     },
     created () {

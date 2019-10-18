@@ -36,6 +36,15 @@ export default {
     axios.get('/auth/github/repo/')
       .then(response => {
         this.repositories = response.data
+        this.repositories = this.repositories.filter(
+          (repo) => {
+            if(repo.owner.login == this.$store.state.users.user.username){
+              return true
+            }else{
+              return false
+            }
+          }
+        )
         for(repo in this.repositories){
           repo.enabled = false
         }
@@ -48,7 +57,7 @@ export default {
   methods: {
     createProject(repo){
       axios.post(`/api/projects/`, {
-        organization:repo.owner.organizations_url,
+        organization:repo.owner.login,
         repo:repo.name,
         repo_url:repo.html_url,
         github_id:repo.id,

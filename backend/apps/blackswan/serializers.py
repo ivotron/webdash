@@ -28,7 +28,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 
 class OwnerSerializer(serializers.Serializer):
-    organizations_url = serializers.CharField(max_length=200)
+    login = serializers.CharField(max_length=200)
 
 
 class GithubRepoSerializer(serializers.Serializer):

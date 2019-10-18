@@ -154,8 +154,9 @@ class QuerysTestCase(APITestCase):
                                      'password': 'password'}, format='json')
         token = Token.objects.get(user__email=self.user2.email)
         client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
-        response = client.get('/api/projects/')
+        response = client.get('/api/projects?user__username=JohnDrapper')
         response.render()
+        print(response.content)
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(response.content, [{'id':self.project4.id,
                                                  'last_execution':getattr(self.project4, "last_execution", None),
@@ -177,7 +178,7 @@ class QuerysTestCase(APITestCase):
                                                 'organization':self.project3.organization,
                                                 'private':self.project3.private,
                                                 'github_id':self.project3.github_id,
-                                                'enabled':self.project4.enabled,
+                                                'enabled':self.project3.enabled,
                                                 'user':[{'id':self.user2.id,
                                                          'email':self.user2.email,
                                                          'username':self.user2.username,
@@ -187,7 +188,7 @@ class QuerysTestCase(APITestCase):
 
     def test_project_public(self):
         client = APIClient()
-        response = client.get('/api/projects?username=JohnDoe')
+        response = client.get('/api/projects?user__username=JohnDoe')
         response.render()
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(response.content, [{'id':self.project.id,
@@ -197,7 +198,7 @@ class QuerysTestCase(APITestCase):
                                                 'organization':self.project.organization,
                                                 'private':self.project.private,
                                                 'github_id':self.project.github_id,
-                                                'enabled':self.project4.enabled,
+                                                'enabled':self.project.enabled,
                                                 'user':[{'id':self.user.id,
                                                          'email':self.user.email,
                                                          'username':self.user.username,
