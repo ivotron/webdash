@@ -32,7 +32,7 @@ googleapis-common-protos==1.6.0
 greenlet==0.4.15
 grpcio==1.22.0
 gunicorn==19.9.0
-httplib2==0.13.1
+httplib2==0.18.0
 idna==2.8
 ipython==7.7.0
 ipython-genutils==0.2.0
